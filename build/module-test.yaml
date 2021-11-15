@@ -1,0 +1,11 @@
+---
+logsBucket: '${PROJECT_ID}-builds-logs'
+
+steps:
+  - id: 'Run go test'
+    name: 'europe-docker.pkg.dev/examples-331911/release/terratest'
+    dir: 'test'
+    entrypoint: 'sh'
+    env:
+    - PROJECT_ID=${PROJECT_ID}
+    args: ['-c', 'go test -v']
