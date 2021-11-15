@@ -1,7 +1,6 @@
 SHELL := /usr/bin/env bash
 
-GOOGLE_APPLICATION_CREDENTIALS := $(PWD)/secrets/$(KEY_FILE)
-PROJECT_ID := $(PROJECT_ID)
+GOOGLE_APPLICATION_CREDENTIALS := ${PWD}/secrets/${KEY_FILE}
 
 define TF_VARS
 -var="project_id=${PROJECT_ID}"
@@ -10,7 +9,7 @@ endef
 # Destroy all remote objects
 .PHONY: go_test
 go_test:
-	export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}; \
+	export GOOGLE_APPLICATION_CREDENTIALS=$(GOOGLE_APPLICATION_CREDENTIALS); \
 	export PROJECT_ID=${PROJECT_ID}; \
 	cd test; \
 	go test -v
@@ -18,7 +17,7 @@ go_test:
 # Initialize the workspace
 .PHONY: tf_init
 tf_init:
-	export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}; \
+	export GOOGLE_APPLICATION_CREDENTIALS=$(GOOGLE_APPLICATION_CREDENTIALS); \
 	cd terraform; \
 	terraform init -backend-config="bucket=${PROJECT_ID}-tfstate-cloud"
 
@@ -31,35 +30,35 @@ tf_validate:
 # Check the providers
 .PHONY: tf_providers
 tf_providers:
-	export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}; \
+	export GOOGLE_APPLICATION_CREDENTIALS=$(GOOGLE_APPLICATION_CREDENTIALS); \
 	cd terraform; \
 	terraform providers
 
 # Check the outputs
 .PHONY: tf_output
 tf_output:
-	export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}; \
+	export GOOGLE_APPLICATION_CREDENTIALS=$(GOOGLE_APPLICATION_CREDENTIALS); \
 	cd terraform; \
 	terraform output
 
 # Refresh
 .PHONY: tf_refresh
 tf_refresh:
-	export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}; \
+	export GOOGLE_APPLICATION_CREDENTIALS=$(GOOGLE_APPLICATION_CREDENTIALS); \
 	cd terraform; \
 	terraform refresh $(TF_VARS)
 
 # Create an execution plan
 .PHONY: tf_plan
 tf_plan:
-	export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}; \
+	export GOOGLE_APPLICATION_CREDENTIALS=$(GOOGLE_APPLICATION_CREDENTIALS); \
 	cd terraform; \
 	terraform plan -out=tf.plan $(TF_VARS)
 
 # Execute the plan
 .PHONY: tf_apply
 tf_apply:
-	export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}; \
+	export GOOGLE_APPLICATION_CREDENTIALS=$(GOOGLE_APPLICATION_CREDENTIALS); \
 	cd terraform; \
 	terraform apply tf.plan; \
 	rm tf.plan
@@ -67,6 +66,6 @@ tf_apply:
 # Destroy all remote objects
 .PHONY: tf_destroy
 tf_destroy:
-	export GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}; \
+	export GOOGLE_APPLICATION_CREDENTIALS=$(GOOGLE_APPLICATION_CREDENTIALS); \
 	cd terraform; \
 	terraform destroy -auto-approve $(TF_VARS)
