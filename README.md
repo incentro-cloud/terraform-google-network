@@ -1,4 +1,4 @@
-# Network Module
+# Network module
 
 ![Cloud Build status](https://badger-tcppdqobjq-ew.a.run.app/build/status?project=examples-331911&id=c1c6a2cf-7fb8-4861-89da-8b29723d82b2 "Cloud Build status")
 
