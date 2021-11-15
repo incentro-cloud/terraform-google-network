@@ -24,14 +24,14 @@ terraform {
 module "network_01" {
   source = "../../"
 
-  project_id     = var.project_id
-  name           = "vpc-network-01"
+  project_id = var.project_id
+  name       = "vpc-network-01"
 
   subnets = [
     {
-      name                     = "default-europe-west1"
-      ip_cidr_range            = "10.0.1.0/24"
-      region                   = "europe-west1"
+      name          = "default-europe-west1"
+      ip_cidr_range = "10.0.1.0/24"
+      region        = "europe-west1"
     }
   ]
 }
@@ -39,14 +39,14 @@ module "network_01" {
 module "network_02" {
   source = "../../"
 
-  project_id     = var.project_id
-  name           = "vpc-network-02"
+  project_id = var.project_id
+  name       = "vpc-network-02"
 
   subnets = [
     {
-      name                     = "default"
-      ip_cidr_range            = "10.1.1.0/24"
-      region                   = "europe-west3"
+      name          = "default"
+      ip_cidr_range = "10.1.1.0/24"
+      region        = "europe-west3"
     }
   ]
 }
@@ -54,14 +54,14 @@ module "network_02" {
 module "network_03" {
   source = "../../"
 
-  project_id     = var.project_id
-  name           = "vpc-network-03"
+  project_id = var.project_id
+  name       = "vpc-network-03"
 
   subnets = [
     {
-      name                     = "default"
-      ip_cidr_range            = "10.2.1.0/24"
-      region                   = "europe-west4"
+      name          = "default"
+      ip_cidr_range = "10.2.1.0/24"
+      region        = "europe-west4"
     }
   ]
 }

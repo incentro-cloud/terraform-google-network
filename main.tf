@@ -8,7 +8,8 @@
 # ---------------------------------------------------------------------------------------------------------------------
 
 module "vpc" {
-  source                          = "./modules/vpc"
+  source = "./modules/vpc"
+
   create_network                  = var.create_network
   name                            = var.name
   auto_create_subnetworks         = var.auto_create_subnetworks
@@ -40,7 +41,8 @@ locals {
 }
 
 module "subnets" {
-  source     = "./modules/subnets"
+  source = "./modules/subnets"
+
   project_id = var.project_id
   subnets    = local.subnets
 }
@@ -69,7 +71,8 @@ locals {
 }
 
 module "routes" {
-  source     = "./modules/routes"
+  source = "./modules/routes"
+
   project_id = var.project_id
   routes     = local.routes
 }
@@ -99,7 +102,8 @@ locals {
 }
 
 module "rules" {
-  source     = "./modules/rules"
+  source = "./modules/rules"
+
   project_id = var.project_id
   rules      = local.rules
 }
@@ -119,7 +123,8 @@ locals {
 }
 
 module "peerings" {
-  source     = "./modules/peerings"
+  source = "./modules/peerings"
+
   project_id = var.project_id
   peerings   = local.peerings
 }
