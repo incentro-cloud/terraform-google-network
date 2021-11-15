@@ -1,16 +1,31 @@
 SHELL := /usr/bin/env bash
 
-GOOGLE_APPLICATION_CREDENTIALS := ${PWD}/secrets/${KEY_FILE}
+GOOGLE_APPLICATION_CREDENTIALS := $(PWD)/secrets/$(KEY_FILE)
 
 define TF_VARS
--var="project_id=${PROJECT_ID}"
+-var="project_id=$(PROJECT_ID)"
 endef
+
+# Run checkov
+.PHONY: checkov
+checkov:
+	checkov --directory . \
+
+# Run checkov on the plan
+.PHONY: checkov_plan
+checkov_plan:
+	export GOOGLE_APPLICATION_CREDENTIALS=$(GOOGLE_APPLICATION_CREDENTIALS); \
+	cd terraform; \
+	terraform plan -out=tf.plan $(TF_VARS); \
+	terraform show -json tf.plan | jq '.' > tf.json; \
+	checkov --file tf.json --skip-framework cloudformation; \
+	rm tf.json
 
 # Destroy all remote objects
 .PHONY: go_test
 go_test:
 	export GOOGLE_APPLICATION_CREDENTIALS=$(GOOGLE_APPLICATION_CREDENTIALS); \
-	export PROJECT_ID=${PROJECT_ID}; \
+	export PROJECT_ID=$(PROJECT_ID); \
 	cd test; \
 	go test -v
 
@@ -19,7 +34,7 @@ go_test:
 tf_init:
 	export GOOGLE_APPLICATION_CREDENTIALS=$(GOOGLE_APPLICATION_CREDENTIALS); \
 	cd terraform; \
-	terraform init -backend-config="bucket=${PROJECT_ID}-tfstate-cloud"
+	terraform init -backend-config="bucket=$(PROJECT_ID)-tfstate"
 
 # Validate the configuration files
 .PHONY: tf_validate
