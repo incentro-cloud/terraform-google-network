@@ -17,8 +17,8 @@ This module supports creating:
 
 ```hcl
 module "network" {
-  source = "github.com/IncentroNext/terraform-google-network"
-
+  source = "github.com/incentro-cloud/terraform-google-network"
+  
   project_id                      = var.project_id
   name                            = "vpc-network"
   delete_default_routes_on_create = true

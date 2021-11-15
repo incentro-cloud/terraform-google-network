@@ -1,4 +1,4 @@
-module github.com/robino-io/terraform-google-network/test
+module github.com/incentro-cloud/terraform-google-network/test
 
 go 1.16
 
