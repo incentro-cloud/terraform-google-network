@@ -33,6 +33,8 @@ locals {
       ip_cidr_range            = x.ip_cidr_range
       region                   = x.region
       description              = lookup(x, "description", null)
+      purpose                  = lookup(x, "purpose", "PRIVATE")
+      role                     = lookup(x, "role", null)
       private_ip_google_access = lookup(x, "private_ip_google_access", false)
       log_config               = lookup(x, "log_config", null)
       secondary_ip_ranges      = lookup(x, "secondary_ip_ranges", [])

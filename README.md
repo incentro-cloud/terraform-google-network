@@ -228,6 +228,8 @@ module "network" {
 | `ip_cidr_range` | string | | Required. The range of internal addresses for the subnet. |
 | `region` | string | | Required. The region of the subnet.  |
 | `description` | string | "" | Optional. The description of the subnet. |
+| `purpose` | string | "PRIVATE" | Optional. The purpose of the subnet. This field can be either PRIVATE or INTERNAL_HTTPS_LOAD_BALANCER. |
+| `role` | string | null | Optional. The role of subnet. Currently, this field is only used when purpose = INTERNAL_HTTPS_LOAD_BALANCER. The value can be set to ACTIVE or BACKUP. |
 | `private_ip_google_access` | bool | false | Optional. When set to 'true', virtual machine instances in this subnet without external IP addresses can access Google APIs and services. |
 | `log_config` | any | null | Optional. The logging options for the subnet flow logs. |
 | `secondary_ip_ranges` | any | [] | Optional. The secondary IP ranges for virtual machine instances contained in this subnet. |
