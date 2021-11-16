@@ -17,7 +17,8 @@ This module supports creating:
 
 ```hcl
 module "network" {
-  source = "github.com/incentro-cloud/terraform-google-network"
+  source = "incentro-cloud/terraform-google-network"
+  version = "~> 0.1"
   
   project_id                      = var.project_id
   name                            = "vpc-network"
