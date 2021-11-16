@@ -13,7 +13,7 @@ This module supports creating:
 - Connectors
 - Peerings
 
-## Usage example
+## Example usage
 
 ```hcl
 module "network" {
