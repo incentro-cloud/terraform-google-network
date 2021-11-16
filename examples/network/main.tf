@@ -69,15 +69,10 @@ module "network" {
 
   rules = [
     {
-      name                    = "allow-connector-to-serverless-egress"
-      description             = null
-      direction               = "EGRESS"
-      priority                = null
-      ranges                  = ["107.178.230.64/26", "35.199.224.0/19"]
-      source_tags             = null
-      source_service_accounts = null
-      target_tags             = ["vpc-connector"]
-      target_service_accounts = null
+      name        = "allow-connector-to-serverless-egress"
+      direction   = "EGRESS"
+      ranges      = ["107.178.230.64/26", "35.199.224.0/19"]
+      target_tags = ["vpc-connector"]
 
       allow = [
         {
@@ -93,19 +88,12 @@ module "network" {
           ports    = ["665-666"]
         }
       ]
-
-      deny = []
     },
     {
-      name                    = "allow-health-check-ingress"
-      description             = null
-      direction               = "INGRESS"
-      priority                = null
-      ranges                  = ["130.211.0.0/22", "35.191.0.0/16", "108.170.220.0/23"]
-      source_tags             = null
-      source_service_accounts = null
-      target_tags             = ["vpc-connector", "health-check"]
-      target_service_accounts = null
+      name        = "allow-health-check-ingress"
+      direction   = "INGRESS"
+      ranges      = ["130.211.0.0/22", "35.191.0.0/16", "108.170.220.0/23"]
+      target_tags = ["vpc-connector", "health-check"]
 
       allow = [
         {
@@ -113,19 +101,12 @@ module "network" {
           ports    = []
         }
       ]
-
-      deny = []
     },
     {
-      name                    = "allow-serverless-to-connector-ingress"
-      description             = null
-      direction               = "INGRESS"
-      priority                = null
-      ranges                  = ["107.178.230.64/26", "35.199.224.0/19"]
-      source_tags             = null
-      source_service_accounts = null
-      target_tags             = ["vpc-connector"]
-      target_service_accounts = null
+      name        = "allow-serverless-to-connector-ingress"
+      direction   = "INGRESS"
+      ranges      = ["107.178.230.64/26", "35.199.224.0/19"]
+      target_tags = ["vpc-connector"]
 
       allow = [
         {
@@ -141,19 +122,12 @@ module "network" {
           ports    = ["665-666"]
         }
       ]
-
-      deny = []
     },
     {
-      name                    = "allow-iap-ingress"
-      description             = null
-      direction               = "INGRESS"
-      priority                = null
-      ranges                  = ["35.235.240.0/20"]
-      source_tags             = null
-      source_service_accounts = null
-      target_tags             = ["iap"]
-      target_service_accounts = null
+      name        = "allow-iap-ingress"
+      direction   = "INGRESS"
+      ranges      = ["35.235.240.0/20"]
+      target_tags = ["iap"]
 
       allow = [
         {
@@ -161,19 +135,13 @@ module "network" {
           ports    = ["22", "3389"]
         }
       ]
-
-      deny = []
     },
     {
-      name                    = "allow-internal-ingress"
-      description             = null
-      direction               = "INGRESS"
-      priority                = 65534
-      ranges                  = ["10.0.1.0/24"]
-      source_tags             = ["vpc-connector"]
-      source_service_accounts = null
-      target_tags             = []
-      target_service_accounts = null
+      name        = "allow-internal-ingress"
+      direction   = "INGRESS"
+      priority    = 65534
+      ranges      = ["10.0.1.0/24"]
+      source_tags = ["vpc-connector"]
 
       allow = [
         {
@@ -189,8 +157,6 @@ module "network" {
           ports    = []
         }
       ]
-
-      deny = []
     }
   ]
 }
