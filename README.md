@@ -202,7 +202,11 @@ module "network" {
 }
 ```
 
-## Variables
+## Arguments
+
+Most arguments map to the official supported arguments. Links to the official documentation are included for completeness.
+
+[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network "google_compute_network") for the official google_compute_network documentation.
 
 | Name | Type | Default | Description |
 |---|---|---|---|
@@ -221,6 +225,8 @@ module "network" {
 | `peerings` | any | [] | Optional. The peerings. |
 
 ### Subnets
+
+[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork "google_compute_subnetwork") for the official google_compute_subnetwork documentation.
 
 | Name | Type | Default | Description |
 |---|---|---|---|
