@@ -26,12 +26,6 @@ module "network" {
 
   subnets = [
     {
-      name          = "connector"
-      ip_cidr_range = "10.0.0.0/28"
-      region        = "europe-west1"
-      description   = "Subnet for serverless VPC access"
-    },
-    {
       name                     = "default"
       ip_cidr_range            = "10.0.1.0/24"
       region                   = "europe-west1"
@@ -43,13 +37,6 @@ module "network" {
         flow_sampling        = "0.5"
         metadata             = "INCLUDE_ALL_METADATA"
       }
-
-      secondary_ip_ranges = [
-        {
-          range_name    = "default-range-01"
-          ip_cidr_range = "10.0.2.0/24"
-        }
-      ]
     }
   ]
 
@@ -64,82 +51,6 @@ module "network" {
   ]
 
   rules = [
-    {
-      name                    = "allow-connector-to-serverless-egress"
-      description             = null
-      direction               = "EGRESS"
-      priority                = null
-      ranges                  = ["107.178.230.64/26", "35.199.224.0/19"]
-      source_tags             = null
-      source_service_accounts = null
-      target_tags             = ["vpc-connector"]
-      target_service_accounts = null
-
-      allow = [
-        {
-          protocol = "icmp"
-          ports    = []
-        },
-        {
-          protocol = "tcp"
-          ports    = ["667"]
-        },
-        {
-          protocol = "udp"
-          ports    = ["665-666"]
-        }
-      ]
-
-      deny = []
-    },
-    {
-      name                    = "allow-health-check-ingress"
-      description             = null
-      direction               = "INGRESS"
-      priority                = null
-      ranges                  = ["130.211.0.0/22", "35.191.0.0/16", "108.170.220.0/23"]
-      source_tags             = null
-      source_service_accounts = null
-      target_tags             = ["vpc-connector", "health-check"]
-      target_service_accounts = null
-
-      allow = [
-        {
-          protocol = "tcp"
-          ports    = []
-        }
-      ]
-
-      deny = []
-    },
-    {
-      name                    = "allow-serverless-to-connector-ingress"
-      description             = null
-      direction               = "INGRESS"
-      priority                = null
-      ranges                  = ["107.178.230.64/26", "35.199.224.0/19"]
-      source_tags             = null
-      source_service_accounts = null
-      target_tags             = ["vpc-connector"]
-      target_service_accounts = null
-
-      allow = [
-        {
-          protocol = "icmp"
-          ports    = []
-        },
-        {
-          protocol = "tcp"
-          ports    = ["667"]
-        },
-        {
-          protocol = "udp"
-          ports    = ["665-666"]
-        }
-      ]
-
-      deny = []
-    },
     {
       name                    = "allow-iap-ingress"
       description             = null
