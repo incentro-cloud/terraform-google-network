@@ -69,6 +69,12 @@ variable "rules" {
   default     = []
 }
 
+variable "connectors" {
+  type = any
+  description = "Optional. The list of serverless VPC access connectors."
+  default     = []
+}
+
 variable "peerings" {
   type        = any
   description = "Optional. The list of peerings."

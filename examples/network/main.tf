@@ -159,4 +159,15 @@ module "network" {
       ]
     }
   ]
+
+  connectors = [
+    {
+      name   = "vpc-connector"
+      region = "europe-west1"
+
+      subnet = {
+        name = module.network.subnets["europe-west1/connector"].name
+      }
+    }
+  ]
 }

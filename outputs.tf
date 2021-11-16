@@ -38,6 +38,16 @@ output "rules_names" {
   description = "The names of the firewall rules."
 }
 
+output "connectors" {
+  value       = module.connectors.connectors
+  description = "The serverless VPC access connectors."
+}
+
+output "connectors_names" {
+  value       = [for x in module.connectors.connectors : x.name]
+  description = "The names of the serverless VPC access connectors."
+}
+
 output "peerings" {
   value       = module.peerings.peerings
   description = "The peerings."

@@ -111,15 +111,48 @@ module "rules" {
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
-# NETWORK PEERINGS
+# SERVERLESS VPC ACCESS CONNECTORS
+# ---------------------------------------------------------------------------------------------------------------------
+
+locals {
+  connectors = [
+    for x in var.connectors : {
+      name           = x.name
+      network        = lookup(x, "network", null)
+      subnet         = lookup(x, "subnet", null)
+      region         = x.region
+      ip_cidr_range  = lookup(x, "ip_cidr_range", null)
+      machine_type   = lookup(x, "machine_type", "e2-micro")
+      min_throughput = lookup(x, "min_throughput", 200)
+      max_throughput = lookup(x, "max_throughput", 300)
+      min_instances  = lookup(x, "min_instances", 2)
+      max_instances  = lookup(x, "max_instances", 3)
+
+    }
+  ]
+}
+
+module "connectors" {
+  source = "./modules/connectors"
+
+  project_id = var.project_id
+  connectors = local.connectors
+}
+
+# ---------------------------------------------------------------------------------------------------------------------
+# PEERINGS
 # ---------------------------------------------------------------------------------------------------------------------
 
 locals {
   peerings = [
     for x in var.peerings : {
-      name         = x.name
-      network      = x.network
-      peer_network = x.peer_network
+      name                                = x.name
+      network                             = x.network
+      peer_network                        = x.peer_network
+      export_custom_routes                = lookup(x, "export_custom_routes", false)
+      import_custom_routes                = lookup(x, "import_custom_routes", false)
+      export_subnet_routes_with_public_ip = lookup(x, "export_subnet_routes_with_public_ip", true)
+      import_subnet_routes_with_public_ip = lookup(x, "import_subnet_routes_with_public_ip", false)
     }
   ]
 }
