@@ -18,7 +18,7 @@ This module supports creating:
 ```hcl
 module "network" {
   source  = "incentro-cloud/network/google"
-  version = "~> 0.0"
+  version = "~> 0.1"
 
   project_id                      = var.project_id
   name                            = "vpc-network"
@@ -73,7 +73,6 @@ module "network" {
       allow = [
         {
           protocol = "icmp"
-          ports    = []
         },
         {
           protocol = "tcp"
@@ -94,7 +93,6 @@ module "network" {
       allow = [
         {
           protocol = "tcp"
-          ports    = []
         }
       ]
     },
@@ -107,7 +105,6 @@ module "network" {
       allow = [
         {
           protocol = "icmp"
-          ports    = []
         },
         {
           protocol = "tcp"
@@ -142,15 +139,12 @@ module "network" {
       allow = [
         {
           protocol = "icmp"
-          ports    = []
         },
         {
           protocol = "tcp"
-          ports    = []
         },
         {
           protocol = "udp"
-          ports    = []
         }
       ]
     }

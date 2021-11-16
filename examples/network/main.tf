@@ -77,7 +77,6 @@ module "network" {
       allow = [
         {
           protocol = "icmp"
-          ports    = []
         },
         {
           protocol = "tcp"
@@ -98,7 +97,6 @@ module "network" {
       allow = [
         {
           protocol = "tcp"
-          ports    = []
         }
       ]
     },
@@ -111,7 +109,6 @@ module "network" {
       allow = [
         {
           protocol = "icmp"
-          ports    = []
         },
         {
           protocol = "tcp"
@@ -146,15 +143,12 @@ module "network" {
       allow = [
         {
           protocol = "icmp"
-          ports    = []
         },
         {
           protocol = "tcp"
-          ports    = []
         },
         {
           protocol = "udp"
-          ports    = []
         }
       ]
     }
