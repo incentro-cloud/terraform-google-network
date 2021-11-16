@@ -212,17 +212,17 @@ Most arguments map to the official supported arguments. Links to the official do
 |---|---|---|---|
 | `project_id` | string |  | Required. The project identifier. |
 | `create_network` | bool | true | Optional. When set to 'true', a VPC network is created. |
-| `name` | string | "" | Optional. The name of the VPC network. |
+| `name` | string | null | Required when `create_network` set to 'true'. The name of the VPC network. |
 | `routing_mode` | string | REGIONAL | Optional. The network routing mode. |
-| `description` | string | "" | Optional. The description of the VPC network. |
+| `description` | string | null | Optional. The description of the VPC network. |
 | `auto_create_subnetworks` | bool | false | Optional. When set to 'true', the network is created in 'auto subnet mode'. When set to 'false', the network is created in 'custom subnet mode'. |
 | `delete_default_routes_on_create` | bool | false | Optional. If set, ensures that all routes within the network specified whose names begin with 'default-route' and with a next hop of 'default-internet-gateway' are deleted. |
-| `mta` | number | 0 | Optional. The network MTU. Must be a value between 1460 and 1500 inclusive. If set to 0 (meaning MTU is unset), the network will default to 1460 automatically. |
+| `mtu` | number | 1460 | Optional. The network MTU. Must be a value between 1460 and 1500 inclusive. |
 | `shared_vpc` | bool | false | Optional. Makes this project a shared VPC host project if 'true'. |
-| `subnets` | any | [] | Optional. The subnets. |
-| `routes` | any | [] | Optional. The routes. |
-| `rules` | any | [] | Optional. The firewall rules. |
-| `peerings` | any | [] | Optional. The peerings. |
+| `subnets` | any | [] | Optional. The list of subnets. |
+| `routes` | any | [] | Optional. The list of routes. |
+| `rules` | any | [] | Optional. The list of firewall rules. |
+| `peerings` | any | [] | Optional. The list of peerings. |
 
 ### Subnets
 
@@ -234,12 +234,12 @@ Most arguments map to the official supported arguments. Links to the official do
 | `network` | string | module.vpc.vpc[0].name | Optional. The network this subnet belongs to. |
 | `ip_cidr_range` | string | | Required. The range of internal addresses for the subnet. |
 | `region` | string | | Required. The region of the subnet.  |
-| `description` | string | "" | Optional. The description of the subnet. |
+| `description` | string | null | Optional. The description of the subnet. |
 | `purpose` | string | "PRIVATE" | Optional. The purpose of the subnet. This field can be either PRIVATE or INTERNAL_HTTPS_LOAD_BALANCER. |
 | `role` | string | null | Optional. The role of subnet. Currently, this field is only used when purpose = INTERNAL_HTTPS_LOAD_BALANCER. The value can be set to ACTIVE or BACKUP. |
 | `private_ip_google_access` | bool | false | Optional. When set to 'true', virtual machine instances in this subnet without external IP addresses can access Google APIs and services. |
 | `log_config` | any | null | Optional. The logging options for the subnet flow logs. |
-| `secondary_ip_ranges` | any | [] | Optional. The secondary IP ranges for virtual machine instances contained in this subnet. |
+| `secondary_ip_ranges` | any | [] | Optional. The list of secondary IP ranges for virtual machine instances contained in this subnet. |
 
 ### Routes
 
@@ -249,8 +249,8 @@ Most arguments map to the official supported arguments. Links to the official do
 |---|---|---|---|
 | `name` | string |  | Required. The name of the route. |
 | `network` | string | module.vpc.vpc[0].name | Optional. The network this route belongs to. |
-| `description` | string | "" | Optional. The description of the subnet. |
-| `tags` | list(string) | null | Optional. The instance tags to which this route applies. |
+| `description` | string | null | Optional. The description of the subnet. |
+| `tags` | any | null | Optional. The instance tags to which this route applies. |
 | `dest_range` | string |  | Required. The destination range of outgoing packets that this route applies to. |
 | `next_hop_gateway` | string | null | Optional. The URL to a gateway that should handle matching packets. |
 | `next_hop_ip` | string | null | Optional. The IP address of an instance that should handle matching packets. |
@@ -259,6 +259,26 @@ Most arguments map to the official supported arguments. Links to the official do
 | `next_hop_vpn_tunnel` | string | null | Optional. The URL to a VPN tunnel that should handle matching packets. |
 | `next_hop_ilb` | string | null | Optional. The IP address or URL to a forwarding rule of type loadBalancingScheme=INTERNAL that should handle matching packets. |
 | `priority` | number | 1000 | Optional. The priority of this route. |
+
+### Firewall rules
+
+[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_firewall "google_compute_firewall") for the official **google_compute_firewall** documentation.
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `name` | string |  | Required. The name of the firewall rule. |
+| `network` | string |  module.vpc.vpc[0].name | Optional. The name or self_link of the network to attach this firewall to. |
+| `direction` | string | The direction of traffic to which this firewall applies. | Required.  |
+| `priority` | number | 1000 | Optional. The priority for this rule. This is an integer between 0 and 65535, both inclusive. When not specified, the value assumed is 1000. |
+| `description` | string | null | Optional. The description of the firewall rule. |
+| `ranges` | any | null | Optional. If ranges are specified, the firewall will apply only to traffic that has IP address in these ranges. These ranges must be expressed in CIDR format. |
+| `source_tags` | any | null | Optional. If source tags are specified, the firewall will apply only to traffic with source IP that belongs to a tag listed in source tags. Source tags cannot be used to control traffic to an instance's external IP address. |
+| `source_service_accounts` | any | null | Optional. If source service accounts are specified, the firewall will apply only to traffic originating from an instance with a service account in this list. Source service accounts cannot be used to control traffic to an instance's external IP address because service accounts are associated with an instance, not an IP address. |
+| `target_tags` | any | null | Optional. The instance tags indicating sets of instances located in the network that may make network connections as specified in allowed. |
+| `target_service_accounts` | any | null | Optional. The service accounts indicating sets of instances located in the network that may make network connections as specified in allowed. |
+| `allow` | any | [] | Optional. The list of allow rules specified by this firewall. Each rule specifies a protocol and port-range tuple that describes a permitted connection. |
+| `deny` | any | [] | Optional. The list of deny rules specified by this firewall. Each rule specifies a protocol and port-range tuple that describes a denied connection. |
+| `log_config` | any | null | Optional. The logging options. If defined, logging is enabled, and logs will be exported to Cloud Logging. |
 
 ## Outputs
 
