@@ -31,10 +31,10 @@ resource "google_compute_subnetwork" "subnets" {
   name                     = each.value.name
   project                  = var.project_id
   description              = each.value.description
-  purpose                  = each.value.purpose
-  role                     = each.value.role
   ip_cidr_range            = each.value.ip_cidr_range
   region                   = each.value.region
+  purpose                  = each.value.purpose
+  role                     = each.value.role
   private_ip_google_access = each.value.private_ip_google_access
   network                  = each.value.network
 
@@ -46,7 +46,7 @@ resource "google_compute_subnetwork" "subnets" {
       flow_sampling        = lookup(log_config.value, "flow_sampling", "0.5")
       metadata             = lookup(log_config.value, "metadata", "INCLUDE_ALL_METADATA")
       metadata_fields      = lookup(log_config.value, "metadata_fields", null)
-      filter_expr          = lookup(log_config.value, "filter_expr", "true")
+      filter_expr          = lookup(log_config.value, "filter_expr", null)
     }
   }
 
