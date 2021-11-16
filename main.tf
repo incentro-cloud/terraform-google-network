@@ -67,7 +67,7 @@ locals {
       next_hop_instance_zone = lookup(x, "next_hop_instance_zone", null)
       next_hop_vpn_tunnel    = lookup(x, "next_hop_vpn_tunnel", null)
       next_hop_ilb           = lookup(x, "next_hop_ilb", null)
-      priority               = lookup(x, "priority", null)
+      priority               = lookup(x, "priority", 1000)
     }
   ]
 }
