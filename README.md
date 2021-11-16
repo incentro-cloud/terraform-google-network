@@ -164,6 +164,7 @@ module "network" {
   peerings = [
     {
       name         = "vpc-network-peering-vpc-network"
+      network      = module.network_01.vpc[0].id
       peer_network = "projects/examples/global/networks/vpc-network"
     }
   ]
