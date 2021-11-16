@@ -33,7 +33,7 @@ locals {
       ip_cidr_range            = x.ip_cidr_range
       region                   = x.region
       description              = lookup(x, "description", null)
-      purpose                  = lookup(x, "purpose", "PRIVATE")
+      purpose                  = lookup(x, "purpose", null)
       role                     = lookup(x, "role", null)
       private_ip_google_access = lookup(x, "private_ip_google_access", false)
       log_config               = lookup(x, "log_config", null)
@@ -89,7 +89,7 @@ locals {
       name                    = x.name
       network                 = lookup(x, "network", module.vpc.vpc[0].name)
       direction               = x.direction
-      priority                = lookup(x, "priority", null)
+      priority                = lookup(x, "priority", 1000)
       description             = lookup(x, "description", null)
       ranges                  = lookup(x, "ranges", null)
       source_tags             = lookup(x, "source_tags", null)
