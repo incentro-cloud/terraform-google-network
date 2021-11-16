@@ -10,7 +10,7 @@ This module supports creating:
 - Subnets
 - Routes
 - Firewall rules
-- Serverless VCP access connectors (In progress)
+- Serverless VPC access connectors (In progress)
 - Peerings
 
 ## Usage
