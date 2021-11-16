@@ -196,6 +196,7 @@ Most arguments map to the official supported arguments. Links to the official do
 | `subnets` | any | [] | Optional. The list of subnets. |
 | `routes` | any | [] | Optional. The list of routes. |
 | `rules` | any | [] | Optional. The list of firewall rules. |
+| `connectors` | any | [] | Optional. The list of serverless VPC access connectors. |
 | `peerings` | any | [] | Optional. The list of peerings. |
 
 ### Subnets
@@ -260,11 +261,11 @@ Most arguments map to the official supported arguments. Links to the official do
 
 | Name | Type | Default | Description |
 |---|---|---|---|
-| `name` | string |  | Required. The name of the connector |
-| `network` | string | null | Optional. The name of the network this connector belongs to. |
-| `subnet` | string | null | Optional. The subnet in which to house the connector. |
-| `region` | string |  | Required. The region in which to house the connector. |
-| `ip_cidr_range` | string | null | Optional.  The range of internal addresses for the connector.  |
+| `name` | string |  | Required. The name of the serverless VPC access connector. |
+| `network` | string | null | Optional. The name of the network this serverless VPC access connectors belongs to. |
+| `subnet` | string | null | Optional. The subnet in which to house the serverless VPC access connectors. |
+| `region` | string |  | Required. The region in which to house the serverless VPC access connectors. |
+| `ip_cidr_range` | string | null | Optional.  The range of internal addresses for the serverless VPC access connectors. |
 | `machine_type` | string | e2-micro | Optional. The machine type of the underlying virtual machine instances. |
 | `min_throughput` | number | 200 | Optional. The minimum throughput in Mbps. |
 | `max_throughput` | number | 300 | Optional. The maximum throughput in Mbps. |
@@ -297,5 +298,7 @@ Most arguments map to the official supported arguments. Links to the official do
 | `routes_names` | The names of the routes. |
 | `rules` | The rules. |
 | `rules_names` | The names of the rules. |
+| `connectors` | The serverless VPC access connectors.. |
+| `connectors_names` | The names of the serverless VPC access connectors. |
 | `peerings` | The peerings. |
 | `peerings_names` | The names of the peerings. |
