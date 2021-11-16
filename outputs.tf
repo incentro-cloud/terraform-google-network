@@ -40,12 +40,12 @@ output "rules_names" {
 
 output "connectors" {
   value       = module.connectors.connectors
-  description = "The serverless VPC access connectors."
+  description = "The connectors."
 }
 
 output "connectors_names" {
   value       = [for x in module.connectors.connectors : x.name]
-  description = "The names of the serverless VPC access connectors."
+  description = "The names of the connectors."
 }
 
 output "peerings" {

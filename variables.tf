@@ -71,7 +71,7 @@ variable "rules" {
 
 variable "connectors" {
   type = any
-  description = "Optional. The list of serverless VPC access connectors."
+  description = "Optional. The list of connectors."
   default     = []
 }
 

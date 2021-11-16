@@ -5,5 +5,5 @@ variable "project_id" {
 
 variable "connectors" {
   type = any
-  description = "Required. The list of serverless VPC access connectors."
+  description = "Required. The list of connectors."
 }

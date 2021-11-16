@@ -2,15 +2,15 @@
 
 ![Cloud Build status](https://badger-tcppdqobjq-ew.a.run.app/build/status?project=examples-331911&id=c1c6a2cf-7fb8-4861-89da-8b29723d82b2 "Cloud Build status")
 
-Module for creating a VPC network, subnets, routes, firewall rules, connectors, and peerings.
+Module for creating a VPC network, subnets, routes, rules, connectors, and peerings.
 
 This module supports creating:
 
 - VPC network
 - Subnets
 - Routes
-- Firewall rules
-- Serverless VPC access connectors (In progress)
+- Rules
+- Connectors
 - Peerings
 
 ## Usage
@@ -196,7 +196,7 @@ Most arguments map to the official supported arguments. Links to the official do
 | `subnets` | any | [] | Optional. The list of subnets. |
 | `routes` | any | [] | Optional. The list of routes. |
 | `rules` | any | [] | Optional. The list of firewall rules. |
-| `connectors` | any | [] | Optional. The list of serverless VPC access connectors. |
+| `connectors` | any | [] | Optional. The list of connectors. |
 | `peerings` | any | [] | Optional. The list of peerings. |
 
 ### Subnets
@@ -235,37 +235,37 @@ Most arguments map to the official supported arguments. Links to the official do
 | `next_hop_ilb` | string | null | Optional. The IP address or URL to a forwarding rule that should handle matching packets. |
 | `priority` | number | 1000 | Optional. The priority of this route. |
 
-### Firewall rules
+### Rules
 
 [Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_firewall "google_compute_firewall") for the official **google_compute_firewall** documentation.
 
 | Name | Type | Default | Description |
 |---|---|---|---|
-| `name` | string |  | Required. The name of the firewall rule. |
-| `network` | string |  module.vpc.vpc[0].name | Optional. The name this firewall rule belongs to. |
-| `direction` | string |  | Required. The direction of traffic to which this firewall applies. |
+| `name` | string |  | Required. The name of the rule. |
+| `network` | string |  module.vpc.vpc[0].name | Optional. The network this rule belongs to. |
+| `direction` | string |  | Required. The direction of traffic to which this rule applies. |
 | `priority` | number | 1000 | Optional. The priority for this rule. This is an integer between 0 and 65535, both inclusive. When not specified, the value assumed is 1000. |
-| `description` | string | null | Optional. The description of the firewall rule. |
-| `ranges` | any | null | Optional. If ranges are specified, the firewall will apply only to traffic that has IP address in these ranges. These ranges must be expressed in CIDR format. |
-| `source_tags` | any | null | Optional. If source tags are specified, the firewall will apply only to traffic with source IP that belongs to a tag listed in source tags. Source tags cannot be used to control traffic to an instance's external IP address. |
-| `source_service_accounts` | any | null | Optional. If source service accounts are specified, the firewall will apply only to traffic originating from an instance with a service account in this list. Source service accounts cannot be used to control traffic to an instance's external IP address because service accounts are associated with an instance, not an IP address. |
+| `description` | string | null | Optional. The description of the rule. |
+| `ranges` | any | null | Optional. If ranges are specified, the rule will apply only to traffic that has IP address in these ranges. These ranges must be expressed in CIDR format. |
+| `source_tags` | any | null | Optional. If source tags are specified, the rule will apply only to traffic with source IP that belongs to a tag listed in source tags. Source tags cannot be used to control traffic to an instance's external IP address. |
+| `source_service_accounts` | any | null | Optional. If source service accounts are specified, the rule will apply only to traffic originating from an instance with a service account in this list. Source service accounts cannot be used to control traffic to an instance's external IP address because service accounts are associated with an instance, not an IP address. |
 | `target_tags` | any | null | Optional. The instance tags indicating sets of instances located in the network that may make network connections as specified in allowed. |
 | `target_service_accounts` | any | null | Optional. The service accounts indicating sets of instances located in the network that may make network connections as specified in allowed. |
-| `allow` | any | [] | Optional. The list of allow rules specified by this firewall. Each rule specifies a protocol and port-range tuple that describes a permitted connection. |
-| `deny` | any | [] | Optional. The list of deny rules specified by this firewall. Each rule specifies a protocol and port-range tuple that describes a denied connection. |
+| `allow` | any | [] | Optional. The list of allow rules specified by this rule. Each rule specifies a protocol and port-range tuple that describes a permitted connection. |
+| `deny` | any | [] | Optional. The list of deny rules specified by this rule. Each rule specifies a protocol and port-range tuple that describes a denied connection. |
 | `log_config` | any | null | Optional. The logging options. If defined, logging is enabled, and logs will be exported to Cloud Logging. |
 
-### Serverless VPC access connectors
+### Connectors
 
 [Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/vpc_access_connector "google_vpc_access_connector") for the official **google_vpc_access_connector** documentation.
 
 | Name | Type | Default | Description |
 |---|---|---|---|
-| `name` | string |  | Required. The name of the serverless VPC access connector. |
-| `network` | string | null | Optional. The name of the network this serverless VPC access connectors belongs to. |
-| `subnet` | string | null | Optional. The subnet in which to house the serverless VPC access connectors. |
-| `region` | string |  | Required. The region in which to house the serverless VPC access connectors. |
-| `ip_cidr_range` | string | null | Optional.  The range of internal addresses for the serverless VPC access connectors. |
+| `name` | string |  | Required. The name of the connector. |
+| `network` | string | null | Optional. The name of the network this connector belongs to. |
+| `subnet` | string | null | Optional. The subnet in which to house the connectors. |
+| `region` | string |  | Required. The region in which to house the connectors. |
+| `ip_cidr_range` | string | null | Optional.  The range of internal addresses for the connectors. |
 | `machine_type` | string | e2-micro | Optional. The machine type of the underlying virtual machine instances. |
 | `min_throughput` | number | 200 | Optional. The minimum throughput in Mbps. |
 | `max_throughput` | number | 300 | Optional. The maximum throughput in Mbps. |
@@ -298,7 +298,7 @@ Most arguments map to the official supported arguments. Links to the official do
 | `routes_names` | The names of the routes. |
 | `rules` | The rules. |
 | `rules_names` | The names of the rules. |
-| `connectors` | The serverless VPC access connectors.. |
-| `connectors_names` | The names of the serverless VPC access connectors. |
+| `connectors` | The connectors.. |
+| `connectors_names` | The names of the connectors. |
 | `peerings` | The peerings. |
 | `peerings_names` | The names of the peerings. |

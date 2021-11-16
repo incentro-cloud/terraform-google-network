@@ -17,3 +17,8 @@ output "network_rules" {
   value       = module.network.rules
   description = "The rules."
 }
+
+output "network_connectors" {
+  value       = module.network.connectors
+  description = "The connectors."
+}
