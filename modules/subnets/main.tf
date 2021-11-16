@@ -28,7 +28,7 @@ terraform {
 
 resource "google_compute_subnetwork" "subnets" {
   for_each                 = { for x in var.subnets : "${x.region}/${x.name}" => x }
-  name                     = "${each.value.name}-${each.value.region}"
+  name                     = each.value.name
   project                  = var.project_id
   description              = each.value.description
   ip_cidr_range            = each.value.ip_cidr_range
