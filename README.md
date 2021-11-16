@@ -156,6 +156,17 @@ module "network" {
     }
   ]
 
+  connectors = [
+    {
+      name   = "vpc-connector"
+      region = "europe-west1"
+
+      subnet = {
+        name = module.network.subnets["europe-west1/connector"].name
+      }
+    }
+  ]
+
   peerings = [
     {
       name         = "vpc-network-peering-vpc-network"
@@ -230,7 +241,7 @@ Most arguments map to the official supported arguments. Links to the official do
 | Name | Type | Default | Description |
 |---|---|---|---|
 | `name` | string |  | Required. The name of the firewall rule. |
-| `network` | string |  module.vpc.vpc[0].name | Optional. The name or self_link of the network to attach this firewall to. |
+| `network` | string |  module.vpc.vpc[0].name | Optional. The name this firewall rule belongs to. |
 | `direction` | string |  | Required. The direction of traffic to which this firewall applies. |
 | `priority` | number | 1000 | Optional. The priority for this rule. This is an integer between 0 and 65535, both inclusive. When not specified, the value assumed is 1000. |
 | `description` | string | null | Optional. The description of the firewall rule. |
@@ -242,6 +253,37 @@ Most arguments map to the official supported arguments. Links to the official do
 | `allow` | any | [] | Optional. The list of allow rules specified by this firewall. Each rule specifies a protocol and port-range tuple that describes a permitted connection. |
 | `deny` | any | [] | Optional. The list of deny rules specified by this firewall. Each rule specifies a protocol and port-range tuple that describes a denied connection. |
 | `log_config` | any | null | Optional. The logging options. If defined, logging is enabled, and logs will be exported to Cloud Logging. |
+
+### Serverless VPC access connectors
+
+[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/vpc_access_connector "google_vpc_access_connector") for the official **google_vpc_access_connector** documentation.
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `name` | string |  | Required. The name of the connector |
+| `network` | string | null | Optional. The name of the network this connector belongs to. |
+| `subnet` | string | null | Optional. The subnet in which to house the connector. |
+| `region` | string |  | Required. The region in which to house the connector. |
+| `ip_cidr_range` | string | null | Optional.  The range of internal addresses for the connector.  |
+| `machine_type` | string | e2-micro | Optional. The machine type of the underlying virtual machine instances. |
+| `min_throughput` | number | 200 | Optional. The minimum throughput in Mbps. |
+| `max_throughput` | number | 300 | Optional. The maximum throughput in Mbps. |
+| `min_instances` | number | 2 | Optional. The minimum value of instances in the underlying autoscaling group. |
+| `max_instances` | number | 3 | Optional. The maximum value of instances in the underlying autoscaling group. |
+
+### Peerings
+
+[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network_peering "google_compute_network_peering") for the official **google_compute_network_peering** documentation.
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `name` | string |  | Required. The name of the peering. |
+| `network` | string |  | Required. The primary network of the peering. |
+| `peer_network` | string |  | Required. The peer network in the peering. The peer network may belong to a different project. |
+| `export_custom_routes` | bool | false | Optional. Whether to export the custom routes to the peer network. |
+| `import_custom_routes` | bool | false | Optional. Whether to import the custom routes from the peer network. |
+| `export_subnet_routes_with_public_ip` | bool | true| Optional. Whether subnet routes with public IP range are exported. |
+| `import_subnet_routes_with_public_ip` | bool | false | Optional. Whether subnet routes with public IP range are imported. |
 
 ## Outputs
 
