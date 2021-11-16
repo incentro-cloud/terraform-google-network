@@ -23,7 +23,7 @@ variable "routing_mode" {
 
 variable "description" {
   type        = string
-  description = "Description of the resource."
+  description = "Description of the VPC network."
   default     = ""
 }
 
@@ -71,6 +71,6 @@ variable "rules" {
 
 variable "peerings" {
   type        = any
-  description = "The network peerings."
+  description = "The peerings."
   default     = []
 }
