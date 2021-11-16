@@ -201,3 +201,23 @@ module "network" {
   ]
 }
 ```
+
+## Variables
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `project_id` | string |  | Required. The project identifier. |
+| `create_network` | bool | true | Optional. When set to 'true', a VPC network is created. |
+| `name` | string | empty | Optional. The name of the VPC network. |
+| `routing_mode` | string | REGIONAL | Optional. The network routing mode. |
+| `description` | string | empty | Optional. Description of the VPC network. |
+| `auto_create_subnetworks` | bool | false | Optional. When set to 'true', the network is created in 'auto subnet mode'. When set to 'false', the network is created in 'custom subnet mode'. |
+| `delete_default_routes_on_create` | bool | false | Optional. If set, ensure that all routes within the network specified whose names begin with 'default-route' and with a next hop of 'default-internet-gateway' are deleted. |
+| `mta` | number | 0 | Optional. The network MTU. Must be a value between 1460 and 1500 inclusive. If set to 0 (meaning MTU is unset), the network will default to 1460 automatically. |
+| `shared_vpc` | bool | false | Optional. Makes this project a shared VPC host project if 'true'. |
+| `subnets` | any | [] | Optional. The subnets. |
+| `routes` | any | [] | Optional. The routes. |
+| `rules` | any | [] | Optional. The firewall rules. |
+| `peerings` | any | [] | Optional. The peerings. |
+
+## Outputs
