@@ -231,6 +231,7 @@ Most arguments map to the official supported arguments. Links to the official do
 | Name | Type | Default | Description |
 |---|---|---|---|
 | `name` | string |  | Required. The name of the subnet. |
+| `network` | string | module.vpc.vpc[0].name | Optional. The network this subnet belongs to. |
 | `ip_cidr_range` | string | | Required. The range of internal addresses for the subnet. |
 | `region` | string | | Required. The region of the subnet.  |
 | `description` | string | "" | Optional. The description of the subnet. |
@@ -239,6 +240,25 @@ Most arguments map to the official supported arguments. Links to the official do
 | `private_ip_google_access` | bool | false | Optional. When set to 'true', virtual machine instances in this subnet without external IP addresses can access Google APIs and services. |
 | `log_config` | any | null | Optional. The logging options for the subnet flow logs. |
 | `secondary_ip_ranges` | any | [] | Optional. The secondary IP ranges for virtual machine instances contained in this subnet. |
+
+### Routes
+
+[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_route "google_compute_route") for the official **google_compute_route** documentation.
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `name` | string |  | Required. The name of the route. |
+| `network` | string | module.vpc.vpc[0].name | Optional. The network this route belongs to. |
+| `description` | string | "" | Optional. The description of the subnet. |
+| `tags` | list(string) | null | Optional. The instance tags to which this route applies. |
+| `dest_range` | string |  | Required. The destination range of outgoing packets that this route applies to. |
+| `next_hop_gateway` | string | null | Optional. The URL to a gateway that should handle matching packets. |
+| `next_hop_ip` | string | null | Optional. The IP address of an instance that should handle matching packets. |
+| `next_hop_instance` | string | null | Optional. The URL to an instance that should handle matching packets. |
+| `next_hop_instance_zone` | string | null | Optional when `next_hop_instance` is specified. The zone of the instance specified in `next_hop_instance`. Omit if `next_hop_instance` is specified as a URL. |
+| `next_hop_vpn_tunnel` | string | null | Optional. The URL to a VPN tunnel that should handle matching packets. |
+| `next_hop_ilb` | string | null | Optional. The IP address or URL to a forwarding rule of type loadBalancingScheme=INTERNAL that should handle matching packets. |
+| `priority` | number | 1000 | Optional. The priority of this route. |
 
 ## Outputs
 
