@@ -235,7 +235,7 @@ Most arguments map to the official supported arguments. Links to the official do
 | `ip_cidr_range` | string | | Required. The range of internal addresses for the subnet. |
 | `region` | string | | Required. The region of the subnet.  |
 | `description` | string | null | Optional. The description of the subnet. |
-| `purpose` | string | "PRIVATE" | Optional. The purpose of the subnet. |
+| `purpose` | string | null | Optional. The purpose of the subnet. |
 | `role` | string | null | Optional. The role of subnet. |
 | `private_ip_google_access` | bool | false | Optional. When set to 'true', virtual machine instances in this subnet without external IP addresses can access Google APIs and services. |
 | `log_config` | any | null | Optional. The logging options for the subnet flow logs. |
