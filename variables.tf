@@ -12,7 +12,7 @@ variable "create_network" {
 variable "name" {
   type        = string
   description = "Optional. The name of the VPC network."
-  default     = null
+  default     = ""
 }
 
 variable "routing_mode" {
@@ -24,7 +24,7 @@ variable "routing_mode" {
 variable "description" {
   type        = string
   description = "Optional. The description of the VPC network."
-  default     = null
+  default     = ""
 }
 
 variable "auto_create_subnetworks" {
