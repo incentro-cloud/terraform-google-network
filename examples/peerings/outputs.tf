@@ -9,7 +9,7 @@ output "network_01_subnets" {
 }
 
 output "network_01_peerings" {
-  value = module.network_01_peerings.peerings
+  value = module.network_01.peerings
 }
 
 output "network_02_vpc" {
