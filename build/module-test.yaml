@@ -1,6 +1,6 @@
 ---
 logsBucket: '${PROJECT_ID}-builds-logs'
-
+timeout: '900s'
 steps:
   - id: 'Run go test'
     name: 'europe-docker.pkg.dev/${PROJECT_ID}/release/terratest'
