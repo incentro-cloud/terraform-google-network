@@ -268,7 +268,7 @@ Most arguments map to the official supported arguments. Links to the official do
 |---|---|---|---|
 | `name` | string |  | Required. The name of the firewall rule. |
 | `network` | string |  module.vpc.vpc[0].name | Optional. The name or self_link of the network to attach this firewall to. |
-| `direction` | string | The direction of traffic to which this firewall applies. | Required.  |
+| `direction` | string |  | Required. The direction of traffic to which this firewall applies. |
 | `priority` | number | 1000 | Optional. The priority for this rule. This is an integer between 0 and 65535, both inclusive. When not specified, the value assumed is 1000. |
 | `description` | string | null | Optional. The description of the firewall rule. |
 | `ranges` | any | null | Optional. If ranges are specified, the firewall will apply only to traffic that has IP address in these ranges. These ranges must be expressed in CIDR format. |
