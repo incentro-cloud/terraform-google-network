@@ -1,4 +1,4 @@
 variable "project_id" {
   type        = string
-  description = "The project identifier."
+  description = "Required. The project identifier."
 }

@@ -4,15 +4,15 @@ variable "project_id" {
 }
 
 variable "create_network" {
-  type = bool
+  type        = bool
   description = "Optional. When set to 'true', a VPC network is created."
-  default = true
+  default     = true
 }
 
 variable "name" {
   type        = string
   description = "Optional. The name of the VPC network."
-  default     = ""
+  default     = null
 }
 
 variable "routing_mode" {
@@ -24,7 +24,7 @@ variable "routing_mode" {
 variable "description" {
   type        = string
   description = "Optional. The description of the VPC network."
-  default     = ""
+  default     = null
 }
 
 variable "auto_create_subnetworks" {
@@ -41,8 +41,8 @@ variable "delete_default_routes_on_create" {
 
 variable "mtu" {
   type        = number
-  description = "Optional. The network MTU. Must be a value between 1460 and 1500 inclusive. If set to 0 (meaning MTU is unset), the network will default to 1460 automatically."
-  default     = 0
+  description = "Optional. The network MTU. Must be a value between 1460 and 1500 inclusive. "
+  default     = 1460
 }
 
 variable "shared_vpc" {
@@ -53,24 +53,24 @@ variable "shared_vpc" {
 
 variable "subnets" {
   type        = any
-  description = "Optional. The subnets."
+  description = "Optional. The list of subnets."
   default     = []
 }
 
 variable "routes" {
   type        = any
-  description = "Optional. The routes."
+  description = "Optional. The list of routes."
   default     = []
 }
 
 variable "rules" {
   type        = any
-  description = "Optional. The firewall rules."
+  description = "Optional. The list of firewall rules."
   default     = []
 }
 
 variable "peerings" {
   type        = any
-  description = "Optional. The peerings."
+  description = "Optional. The list of peerings."
   default     = []
 }
