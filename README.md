@@ -119,9 +119,9 @@ module "network" {
 |---|---|---|---|
 | `project_id` | string |  | Required. The project identifier. |
 | `create_network` | bool | true | Optional. When set to 'true', a VPC network is created. |
-| `name` | string | empty | Optional. The name of the VPC network. |
+| `name` | string | "" | Optional. The name of the VPC network. |
 | `routing_mode` | string | REGIONAL | Optional. The network routing mode. |
-| `description` | string | empty | Optional. Description of the VPC network. |
+| `description` | string | "" | Optional. The description of the VPC network. |
 | `auto_create_subnetworks` | bool | false | Optional. When set to 'true', the network is created in 'auto subnet mode'. When set to 'false', the network is created in 'custom subnet mode'. |
 | `delete_default_routes_on_create` | bool | false | Optional. If set, ensures that all routes within the network specified whose names begin with 'default-route' and with a next hop of 'default-internet-gateway' are deleted. |
 | `mta` | number | 0 | Optional. The network MTU. Must be a value between 1460 and 1500 inclusive. If set to 0 (meaning MTU is unset), the network will default to 1460 automatically. |
@@ -131,4 +131,29 @@ module "network" {
 | `rules` | any | [] | Optional. The firewall rules. |
 | `peerings` | any | [] | Optional. The peerings. |
 
+### Subnets
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `name` | string |  | Required. The name of the subnet. |
+| `ip_cidr_range` | string | | Required. The range of internal addresses for the subnet. |
+| `region` | string | | Required. The region of the subnet.  |
+| `description` | string | "" | Optional. The description of the subnet. |
+| `private_ip_google_access` | bool | false | Optional. When set to 'true', virtual machine instances in this subnet without external IP addresses can access Google APIs and services. |
+| `log_config` | any | null | Optional. The logging options for the subnet flow logs. |
+| `secondary_ip_ranges` | any | [] | Optional. The secondary IP ranges for virtual machine instances contained in this subnet. |
+
 ## Outputs
+
+| Name | Description |
+|---|---|
+| `vpc` | The VPC network. |
+| `vpc_name` | The name of the VPC network. |
+| `subnets` | The subnets. |
+| `subnets_names` | The names of the subnets. |
+| `routes` | The routes. |
+| `routes_names` | The names of the routes. |
+| `rules` | The rules. |
+| `rules_names` | The names of the rules. |
+| `peerings` | The peerings. |
+| `peerings_names` | The names of the peerings. |
