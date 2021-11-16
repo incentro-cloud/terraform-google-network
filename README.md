@@ -235,8 +235,8 @@ Most arguments map to the official supported arguments. Links to the official do
 | `ip_cidr_range` | string | | Required. The range of internal addresses for the subnet. |
 | `region` | string | | Required. The region of the subnet.  |
 | `description` | string | null | Optional. The description of the subnet. |
-| `purpose` | string | "PRIVATE" | Optional. The purpose of the subnet. This field can be either PRIVATE or INTERNAL_HTTPS_LOAD_BALANCER. |
-| `role` | string | null | Optional. The role of subnet. Currently, this field is only used when purpose = INTERNAL_HTTPS_LOAD_BALANCER. The value can be set to ACTIVE or BACKUP. |
+| `purpose` | string | "PRIVATE" | Optional. The purpose of the subnet. |
+| `role` | string | null | Optional. The role of subnet. |
 | `private_ip_google_access` | bool | false | Optional. When set to 'true', virtual machine instances in this subnet without external IP addresses can access Google APIs and services. |
 | `log_config` | any | null | Optional. The logging options for the subnet flow logs. |
 | `secondary_ip_ranges` | any | [] | Optional. The list of secondary IP ranges for virtual machine instances contained in this subnet. |
@@ -255,9 +255,9 @@ Most arguments map to the official supported arguments. Links to the official do
 | `next_hop_gateway` | string | null | Optional. The URL to a gateway that should handle matching packets. |
 | `next_hop_ip` | string | null | Optional. The IP address of an instance that should handle matching packets. |
 | `next_hop_instance` | string | null | Optional. The URL to an instance that should handle matching packets. |
-| `next_hop_instance_zone` | string | null | Optional when `next_hop_instance` is specified. The zone of the instance specified in `next_hop_instance`. Omit if `next_hop_instance` is specified as a URL. |
+| `next_hop_instance_zone` | string | null | Optional when `next_hop_instance` is specified. The zone of the instance specified in `next_hop_instance`. |
 | `next_hop_vpn_tunnel` | string | null | Optional. The URL to a VPN tunnel that should handle matching packets. |
-| `next_hop_ilb` | string | null | Optional. The IP address or URL to a forwarding rule of type loadBalancingScheme=INTERNAL that should handle matching packets. |
+| `next_hop_ilb` | string | null | Optional. The IP address or URL to a forwarding rule that should handle matching packets. |
 | `priority` | number | 1000 | Optional. The priority of this route. |
 
 ### Firewall rules
