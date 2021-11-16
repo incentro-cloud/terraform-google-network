@@ -6,5 +6,4 @@ variable "project_id" {
 variable "subnets" {
   type        = any
   description = "The subnets."
-  default     = []
 }
