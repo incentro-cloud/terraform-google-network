@@ -30,13 +30,13 @@ module "network" {
 
   subnets = [
     {
-      name          = "connector-europe-west1"
+      name          = "connector"
       ip_cidr_range = "10.0.0.0/28"
       region        = "europe-west1"
       description   = "Subnet for serverless VPC access"
     },
     {
-      name                     = "default-europe-west1"
+      name                     = "default"
       ip_cidr_range            = "10.0.1.0/24"
       region                   = "europe-west1"
       private_ip_google_access = true
@@ -50,7 +50,7 @@ module "network" {
 
       secondary_ip_ranges = [
         {
-          range_name    = "default-europe-west1-range-01"
+          range_name    = "default-range-01"
           ip_cidr_range = "10.0.2.0/24"
         }
       ]
