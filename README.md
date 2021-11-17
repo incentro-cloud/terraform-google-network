@@ -173,9 +173,9 @@ module "network" {
 
 ## Inputs
 
-Most inputs map to the official supported arguments. Links to the official documentation are included.
+Most inputs map to the supported arguments. Links to the official documentation are included.
 
-[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network "google_compute_network") for the official **google_compute_network** documentation.
+[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network "google_compute_network") for the **google_compute_network** documentation.
 
 | Name | Type | Default | Description |
 |---|---|---|---|
@@ -196,7 +196,7 @@ Most inputs map to the official supported arguments. Links to the official docum
 
 ### Subnets
 
-[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork "google_compute_subnetwork") for the official **google_compute_subnetwork** documentation.
+[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork "google_compute_subnetwork") for the **google_compute_subnetwork** documentation.
 
 | Name | Type | Default | Description |
 |---|---|---|---|
@@ -213,7 +213,7 @@ Most inputs map to the official supported arguments. Links to the official docum
 
 ### Routes
 
-[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_route "google_compute_route") for the official **google_compute_route** documentation.
+[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_route "google_compute_route") for the **google_compute_route** documentation.
 
 | Name | Type | Default | Description |
 |---|---|---|---|
@@ -232,7 +232,7 @@ Most inputs map to the official supported arguments. Links to the official docum
 
 ### Rules
 
-[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_firewall "google_compute_firewall") for the official **google_compute_firewall** documentation.
+[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_firewall "google_compute_firewall") for the **google_compute_firewall** documentation.
 
 | Name | Type | Default | Description |
 |---|---|---|---|
@@ -252,7 +252,7 @@ Most inputs map to the official supported arguments. Links to the official docum
 
 ### Connectors
 
-[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/vpc_access_connector "google_vpc_access_connector") for the official **google_vpc_access_connector** documentation.
+[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/vpc_access_connector "google_vpc_access_connector") for the **google_vpc_access_connector** documentation.
 
 | Name | Type | Default | Description |
 |---|---|---|---|
@@ -269,7 +269,7 @@ Most inputs map to the official supported arguments. Links to the official docum
 
 ### Peerings
 
-[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network_peering "google_compute_network_peering") for the official **google_compute_network_peering** documentation.
+[Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network_peering "google_compute_network_peering") for the **google_compute_network_peering** documentation.
 
 | Name | Type | Default | Description |
 |---|---|---|---|
