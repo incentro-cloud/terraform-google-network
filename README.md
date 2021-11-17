@@ -173,7 +173,7 @@ module "network" {
 
 ## Inputs
 
-Most inputs map to the official supported arguments. Links to the official documentation are included for completeness.
+Most inputs map to the official supported arguments. Links to the official documentation are included.
 
 [Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network "google_compute_network") for the official **google_compute_network** documentation.
 
