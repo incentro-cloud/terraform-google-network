@@ -18,7 +18,7 @@ terraform {
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
-# VPC NETWORK, SUBNETS, ROUTES, RULES, AND CONNECTORS
+# VPC NETWORK, SUBNET, ROUTE, RULES, AND CONNECTOR
 # ---------------------------------------------------------------------------------------------------------------------
 
 module "network" {
@@ -30,17 +30,10 @@ module "network" {
 
   subnets = [
     {
-      name          = "connector"
-      ip_cidr_range = "10.0.0.0/28"
-      region        = "europe-west1"
-      description   = "Subnet for serverless VPC access"
-    },
-    {
       name                     = "default"
       ip_cidr_range            = "10.0.1.0/24"
       region                   = "europe-west1"
       private_ip_google_access = true
-      description              = "Subnet for default workloads"
 
       log_config = {
         aggregation_interval = "INTERVAL_5_SEC"
@@ -156,12 +149,9 @@ module "network" {
 
   connectors = [
     {
-      name   = "vpc-connector"
-      region = "europe-west1"
-
-      subnet = {
-        name = module.network.subnets["europe-west1/connector"].name
-      }
+      name          = "vpc-connector"
+      ip_cidr_range = "10.0.0.0/28"
+      region        = "europe-west1"
     }
   ]
 }
