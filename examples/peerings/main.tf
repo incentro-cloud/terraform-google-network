@@ -18,14 +18,14 @@ terraform {
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
-# VPC NETWORKS, SUBNETS, AND PEERINGS
+# VPC NETWORKS, SUBNETS, AND PEERING
 # ---------------------------------------------------------------------------------------------------------------------
 
-module "network_01" {
+module "network" {
   source = "../../"
 
   project_id = var.project_id
-  name       = "vpc-network-01"
+  name       = "vpc-network"
 
   subnets = [
     {
@@ -37,74 +37,23 @@ module "network_01" {
 
   peerings = [
     {
-      name         = "vpc-network-01-peering-vpc-network-02"
-      network      = module.network_01.vpc[0].id
-      peer_network = module.network_02.vpc[0].id
-    },
-    {
-      name         = "vpc-network-01-peering-vpc-network-03"
-      network      = module.network_01.vpc[0].id
-      peer_network = module.network_03.vpc[0].id
+      name         = "vpc-network-01-peer-vpc-network-peer"
+      peer_network = module.network_peer.vpc[0].id
     }
   ]
 }
 
-module "network_02" {
+module "network_peer" {
   source = "../../"
 
   project_id = var.project_id
-  name       = "vpc-network-02"
+  name       = "vpc-network-peer"
 
   subnets = [
     {
       name          = "default"
       ip_cidr_range = "10.1.1.0/24"
       region        = "europe-west3"
-    }
-  ]
-}
-
-module "network_03" {
-  source = "../../"
-
-  project_id = var.project_id
-  name       = "vpc-network-03"
-
-  subnets = [
-    {
-      name          = "default"
-      ip_cidr_range = "10.2.1.0/24"
-      region        = "europe-west4"
-    }
-  ]
-}
-
-module "network_02_peerings" {
-  source = "../../"
-
-  project_id     = var.project_id
-  create_network = false
-
-  peerings = [
-    {
-      name         = "vpc-network-02-peering-vpc-network-01"
-      network      = module.network_02.vpc[0].id
-      peer_network = module.network_01.vpc[0].id
-    }
-  ]
-}
-
-module "network_03_peerings" {
-  source = "../../"
-
-  project_id     = var.project_id
-  create_network = false
-
-  peerings = [
-    {
-      name         = "vpc-network-03-peering-vpc-network-01"
-      network      = module.network_03.vpc[0].id
-      peer_network = module.network_01.vpc[0].id
     }
   ]
 }
