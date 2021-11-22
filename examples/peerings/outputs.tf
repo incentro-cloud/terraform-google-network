@@ -1,41 +1,23 @@
-output "network_01_vpc" {
-  value       = module.network_01.vpc
+output "network_vpc" {
+  value       = module.network.vpc
   description = "The name of the VPC network."
 }
 
-output "network_01_subnets" {
-  value       = module.network_01.subnets
+output "network_subnets" {
+  value       = module.network.subnets
   description = "The names of the subnets."
 }
 
-output "network_01_peerings" {
-  value = module.network_01.peerings
+output "network_peerings" {
+  value = module.network.peerings
 }
 
-output "network_02_vpc" {
-  value       = module.network_02.vpc
+output "network_peer_vpc" {
+  value       = module.network_peer.vpc
   description = "The name of the VPC network."
 }
 
-output "network_02_subnets" {
-  value       = module.network_02.subnets
+output "network_peer_subnets" {
+  value       = module.network_peer.subnets
   description = "The names of the subnets."
-}
-
-output "network_02_peerings" {
-  value = module.network_02_peerings.peerings
-}
-
-output "network_03_vpc" {
-  value       = module.network_03.vpc
-  description = "The name of the VPC network."
-}
-
-output "network_03_subnets" {
-  value       = module.network_03.subnets
-  description = "The names of the subnets."
-}
-
-output "network_03_peerings" {
-  value = module.network_03_peerings.peerings
 }
