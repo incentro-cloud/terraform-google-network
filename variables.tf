@@ -12,7 +12,7 @@ variable "create_network" {
 variable "name" {
   type        = string
   description = "Optional. The name of the VPC network."
-  default     = ""
+  default     = "vpc-network"
 }
 
 variable "routing_mode" {

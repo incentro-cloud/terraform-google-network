@@ -27,11 +27,12 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "google_vpc_access_connector" "connectors" {
-  provider       = google-beta
+  provider = google-beta
+
   for_each       = { for x in var.connectors : x.name => x }
   name           = each.value.name
   project        = var.project_id
-  network        = each.value.network
+  network        = lookup(each.value, "subnet") == null ? each.value.network : null
   region         = each.value.region
   ip_cidr_range  = each.value.ip_cidr_range
   machine_type   = each.value.machine_type

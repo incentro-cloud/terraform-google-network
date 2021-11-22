@@ -60,7 +60,7 @@ locals {
       network                = lookup(x, "network", module.vpc.vpc[0].name)
       description            = lookup(x, "description", null)
       tags                   = lookup(x, "tags", null)
-      dest_range             = x.dest_range
+      dest_range             = lookup(x, "dest_range", "0.0.0.0/0")
       next_hop_gateway       = lookup(x, "next_hop_internet", false) == true ? "default-internet-gateway" : null
       next_hop_ip            = lookup(x, "next_hop_ip", null)
       next_hop_instance      = lookup(x, "next_hop_instance", null)
@@ -88,7 +88,7 @@ locals {
     for x in var.rules : {
       name                    = x.name
       network                 = lookup(x, "network", module.vpc.vpc[0].name)
-      direction               = x.direction
+      direction               = lookup(x, "direction", "INGRESS")
       priority                = lookup(x, "priority", 1000)
       description             = lookup(x, "description", null)
       ranges                  = lookup(x, "ranges", null)
@@ -117,8 +117,8 @@ module "rules" {
 locals {
   connectors = [
     for x in var.connectors : {
-      name           = x.name
-      network        = lookup(x, "network", null)
+      name           = lookup(x, "name", "vpc-connector")
+      network        = lookup(x, "network", module.vpc.vpc[0].name)
       subnet         = lookup(x, "subnet", null)
       region         = x.region
       ip_cidr_range  = lookup(x, "ip_cidr_range", null)
@@ -127,7 +127,6 @@ locals {
       max_throughput = lookup(x, "max_throughput", 300)
       min_instances  = lookup(x, "min_instances", 2)
       max_instances  = lookup(x, "max_instances", 3)
-
     }
   ]
 }
@@ -147,7 +146,7 @@ locals {
   peerings = [
     for x in var.peerings : {
       name                                = x.name
-      network                             = x.network
+      network                             = lookup(x, "network", module.vpc.vpc[0].id)
       peer_network                        = x.peer_network
       export_custom_routes                = lookup(x, "export_custom_routes", false)
       import_custom_routes                = lookup(x, "import_custom_routes", false)
