@@ -26,17 +26,10 @@ module "network" {
 
   subnets = [
     {
-      name          = "connector"
-      ip_cidr_range = "10.0.0.0/28"
-      region        = "europe-west1"
-      description   = "Subnet for serverless VPC access"
-    },
-    {
       name                     = "default"
       ip_cidr_range            = "10.0.1.0/24"
       region                   = "europe-west1"
       private_ip_google_access = true
-      description              = "Subnet for default workloads"
 
       log_config = {
         aggregation_interval = "INTERVAL_5_SEC"
@@ -152,20 +145,16 @@ module "network" {
 
   connectors = [
     {
-      name   = "vpc-connector"
-      region = "europe-west1"
-
-      subnet = {
-        name = module.network.subnets["europe-west1/connector"].name
-      }
+      name          = "vpc-connector"
+      ip_cidr_range = "10.0.0.0/28"
+      region        = "europe-west1"
     }
   ]
-
+  
   peerings = [
     {
-      name         = "vpc-network-peering-vpc-network"
-      network      = module.network.vpc[0].id
-      peer_network = "projects/examples/global/networks/vpc-network"
+      name         = "vpc-network-peer-vpc-network-peer"
+      peer_network = "projects/examples/global/networks/vpc-network-peer"
     }
   ]
 }
@@ -181,8 +170,8 @@ Most inputs map to the supported arguments. Links to the official documentation 
 |---|---|---|---|
 | `project_id` | string |  | Required. The project identifier. |
 | `create_network` | bool | true | Optional. When set to 'true', a VPC network is created. |
-| `name` | string | null | Required when `create_network` set to 'true'. The name of the VPC network. |
-| `routing_mode` | string | REGIONAL | Optional. The network routing mode. |
+| `name` | string | "vpc-network" | Optional. The name of the VPC network. |
+| `routing_mode` | string | "REGIONAL" | Optional. The network routing mode. |
 | `description` | string | null | Optional. The description of the VPC network. |
 | `auto_create_subnetworks` | bool | false | Optional. When set to 'true', the network is created in 'auto subnet mode'. When set to 'false', the network is created in 'custom subnet mode'. |
 | `delete_default_routes_on_create` | bool | false | Optional. If set, ensures that all routes within the network specified whose names begin with 'default-route' and with a next hop of 'default-internet-gateway' are deleted. |
@@ -201,7 +190,7 @@ Most inputs map to the supported arguments. Links to the official documentation 
 | Name | Type | Default | Description |
 |---|---|---|---|
 | `name` | string |  | Required. The name of the subnet. |
-| `network` | string | module.vpc.vpc[0].name | Optional. The network this subnet belongs to. |
+| `network` | string | module.vpc | Optional. The network this subnet belongs to. |
 | `ip_cidr_range` | string | | Required. The range of internal addresses for the subnet. |
 | `region` | string | | Required. The region of the subnet.  |
 | `description` | string | null | Optional. The description of the subnet. |
@@ -218,10 +207,10 @@ Most inputs map to the supported arguments. Links to the official documentation 
 | Name | Type | Default | Description |
 |---|---|---|---|
 | `name` | string |  | Required. The name of the route. |
-| `network` | string | module.vpc.vpc[0].name | Optional. The network this route belongs to. |
+| `network` | string | module.vpc | Optional. The network this route belongs to. |
 | `description` | string | null | Optional. The description of the subnet. |
 | `tags` | any | null | Optional. The instance tags to which this route applies. |
-| `dest_range` | string |  | Required. The destination range of outgoing packets that this route applies to. |
+| `dest_range` | string | "0.0.0.0/0" | Optional. The destination range of outgoing packets that this route applies to. |
 | `next_hop_gateway` | string | null | Optional. The URL to a gateway that should handle matching packets. |
 | `next_hop_ip` | string | null | Optional. The IP address of an instance that should handle matching packets. |
 | `next_hop_instance` | string | null | Optional. The URL to an instance that should handle matching packets. |
@@ -237,8 +226,8 @@ Most inputs map to the supported arguments. Links to the official documentation 
 | Name | Type | Default | Description |
 |---|---|---|---|
 | `name` | string |  | Required. The name of the rule. |
-| `network` | string |  module.vpc.vpc[0].name | Optional. The network this rule belongs to. |
-| `direction` | string |  | Required. The direction of traffic to which this rule applies. |
+| `network` | string |  module.vpc | Optional. The network this rule belongs to. |
+| `direction` | string | "INGRESS" | Optional. The direction of traffic to which this rule applies. |
 | `priority` | number | 1000 | Optional. The priority for this rule. This is an integer between 0 and 65535, both inclusive. When not specified, the value assumed is 1000. |
 | `description` | string | null | Optional. The description of the rule. |
 | `ranges` | any | null | Optional. If ranges are specified, the rule will apply only to traffic that has IP address in these ranges. These ranges must be expressed in CIDR format. |
@@ -256,11 +245,11 @@ Most inputs map to the supported arguments. Links to the official documentation 
 
 | Name | Type | Default | Description |
 |---|---|---|---|
-| `name` | string |  | Required. The name of the connector. |
-| `network` | string | null | Optional. The name of the network this connector belongs to. |
+| `name` | string | "vpc-connector" | Optional. The name of the connector. |
+| `network` | string | module.vpc | Optional. The name of the network this connector belongs to. |
 | `subnet` | string | null | Optional. The subnet in which to house the connectors. |
 | `region` | string |  | Required. The region in which to house the connectors. |
-| `ip_cidr_range` | string | null | Optional.  The range of internal addresses for the connectors. |
+| `ip_cidr_range` | string | null | Optional. The range of internal addresses for the connectors. |
 | `machine_type` | string | e2-micro | Optional. The machine type of the underlying virtual machine instances. |
 | `min_throughput` | number | 200 | Optional. The minimum throughput in Mbps. |
 | `max_throughput` | number | 300 | Optional. The maximum throughput in Mbps. |
@@ -274,7 +263,7 @@ Most inputs map to the supported arguments. Links to the official documentation 
 | Name | Type | Default | Description |
 |---|---|---|---|
 | `name` | string |  | Required. The name of the peering. |
-| `network` | string |  | Required. The primary network of the peering. |
+| `network` | string | module.vpc | Required. The primary network of the peering. |
 | `peer_network` | string |  | Required. The peer network in the peering. The peer network may belong to a different project. |
 | `export_custom_routes` | bool | false | Optional. Whether to export the custom routes to the peer network. |
 | `import_custom_routes` | bool | false | Optional. Whether to import the custom routes from the peer network. |
