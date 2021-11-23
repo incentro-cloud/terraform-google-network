@@ -10,7 +10,7 @@
 module "vpc" {
   source = "./modules/vpc"
 
-  create_network                  = var.create_network
+  create_vpc                      = var.create_vpc
   name                            = var.name
   auto_create_subnetworks         = var.auto_create_subnetworks
   routing_mode                    = var.routing_mode

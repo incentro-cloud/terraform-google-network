@@ -27,7 +27,7 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "google_compute_network" "vpc" {
-  count                           = var.create_network ? 1 : 0
+  count                           = var.create_vpc ? 1 : 0
   name                            = var.name
   auto_create_subnetworks         = var.auto_create_subnetworks
   routing_mode                    = var.routing_mode

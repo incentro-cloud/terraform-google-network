@@ -3,7 +3,7 @@ variable "project_id" {
   description = "Required. The project identifier."
 }
 
-variable "create_network" {
+variable "create_vpc" {
   type = bool
   description = "Optional. When set to 'true', a VPC network is created."
 }

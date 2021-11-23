@@ -1,10 +1,10 @@
 output "vpc" {
-  value       = var.create_network ? module.vpc.vpc : null
+  value       = var.create_vpc ? module.vpc.vpc : null
   description = "The VPC network."
 }
 
 output "vpc_name" {
-  value       = var.create_network ? module.vpc.vpc[0].name : null
+  value       = var.create_vpc ? module.vpc.vpc[0].name : null
   description = "The name of the VPC network."
 }
 

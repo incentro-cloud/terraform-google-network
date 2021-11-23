@@ -169,7 +169,7 @@ Most inputs map to the supported arguments. Links to the official documentation 
 | Name | Type | Default | Description |
 |---|---|---|---|
 | `project_id` | string |  | Required. The project identifier. |
-| `create_network` | bool | true | Optional. When set to 'true', a VPC network is created. |
+| `create_vpc` | bool | true | Optional. When set to 'true', a VPC network is created. |
 | `name` | string | "vpc-network" | Optional. The name of the VPC network. |
 | `routing_mode` | string | "REGIONAL" | Optional. The network routing mode. |
 | `description` | string | null | Optional. The description of the VPC network. |

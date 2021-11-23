@@ -43,7 +43,6 @@ resource "google_compute_firewall" "rules" {
 
   dynamic "log_config" {
     for_each = lookup(each.value, "log_config") == null ? [] : [each.value.log_config]
-
     content {
       metadata = lookup(log_config.value, "metadata", "INCLUDE_ALL_METADATA")
     }
@@ -51,7 +50,6 @@ resource "google_compute_firewall" "rules" {
 
   dynamic "allow" {
     for_each = lookup(each.value, "allow", [])
-
     content {
       protocol = allow.value.protocol
       ports    = lookup(allow.value, "ports", null)
@@ -60,7 +58,6 @@ resource "google_compute_firewall" "rules" {
 
   dynamic "deny" {
     for_each = lookup(each.value, "deny", [])
-
     content {
       protocol = deny.value.protocol
       ports    = lookup(deny.value, "ports", null)

@@ -43,7 +43,6 @@ resource "google_vpc_access_connector" "connectors" {
 
   dynamic "subnet" {
     for_each = lookup(each.value, "subnet") == null ? [] : [each.value.subnet]
-
     content {
       name       = subnet.value.name
       project_id = lookup(subnet.value, "project_id", var.project_id)
