@@ -164,6 +164,10 @@ module "network" {
 
 Most inputs map to the supported arguments. Links to the official documentation are included.
 
+### VPC
+
+Submodule for creating a VPC network.
+
 [Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network "google_compute_network") for the **google_compute_network** documentation.
 
 | Name | Type | Default | Description |
@@ -185,6 +189,8 @@ Most inputs map to the supported arguments. Links to the official documentation 
 
 ### Subnets
 
+Submodule for creating subnets.
+
 [Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork "google_compute_subnetwork") for the **google_compute_subnetwork** documentation.
 
 | Name | Type | Default | Description |
@@ -201,6 +207,8 @@ Most inputs map to the supported arguments. Links to the official documentation 
 | `secondary_ip_ranges` | any | [] | Optional. The list of secondary IP ranges for virtual machine instances contained in this subnet. |
 
 ### Routes
+
+Submodule for creating routes.
 
 [Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_route "google_compute_route") for the **google_compute_route** documentation.
 
@@ -220,6 +228,8 @@ Most inputs map to the supported arguments. Links to the official documentation 
 | `priority` | number | 1000 | Optional. The priority of this route. |
 
 ### Rules
+
+Submodule for creating rules.
 
 [Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_firewall "google_compute_firewall") for the **google_compute_firewall** documentation.
 
@@ -241,6 +251,8 @@ Most inputs map to the supported arguments. Links to the official documentation 
 
 ### Connectors
 
+Submodule for creating connectors.
+
 [Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/vpc_access_connector "google_vpc_access_connector") for the **google_vpc_access_connector** documentation.
 
 | Name | Type | Default | Description |
@@ -257,6 +269,8 @@ Most inputs map to the supported arguments. Links to the official documentation 
 | `max_instances` | number | 3 | Optional. The maximum value of instances in the underlying autoscaling group. |
 
 ### Peerings
+
+Submodule for creating network peerings.
 
 [Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network_peering "google_compute_network_peering") for the **google_compute_network_peering** documentation.
 
@@ -282,7 +296,7 @@ Most inputs map to the supported arguments. Links to the official documentation 
 | `routes_names` | The names of the routes. |
 | `rules` | The rules. |
 | `rules_names` | The names of the rules. |
-| `connectors` | The connectors.. |
+| `connectors` | The connectors. |
 | `connectors_names` | The names of the connectors. |
 | `peerings` | The peerings. |
 | `peerings_names` | The names of the peerings. |
