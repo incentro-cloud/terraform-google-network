@@ -27,7 +27,7 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "google_compute_subnetwork" "subnets" {
-  for_each                 = { for x in var.subnets : "${x.region}/${x.name}" => x }
+  for_each                 = { for subnet in var.subnets : "${subnet.region}/${subnet.name}" => subnet }
   name                     = each.value.name
   project                  = var.project_id
   description              = each.value.description

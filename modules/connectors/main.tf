@@ -29,7 +29,7 @@ terraform {
 resource "google_vpc_access_connector" "connectors" {
   provider = google-beta
 
-  for_each       = { for x in var.connectors : x.name => x }
+  for_each       = { for connector in var.connectors : connector.name => connector }
   name           = each.value.name
   project        = var.project_id
   network        = lookup(each.value, "subnet") == null ? each.value.network : null

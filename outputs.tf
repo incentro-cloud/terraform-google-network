@@ -14,7 +14,7 @@ output "subnets" {
 }
 
 output "subnets_names" {
-  value       = [for x in module.subnets.subnets : x.name]
+  value       = [for subnet in module.subnets.subnets : subnet.name]
   description = "The names of the subnets."
 }
 
@@ -24,7 +24,7 @@ output "routes" {
 }
 
 output "routes_names" {
-  value       = [for x in module.routes.routes : x.name]
+  value       = [for route in module.routes.routes : route.name]
   description = "The names of the routes."
 }
 
@@ -34,7 +34,7 @@ output "rules" {
 }
 
 output "rules_names" {
-  value       = [for x in module.rules.rules : x.name]
+  value       = [for rule in module.rules.rules : rule.name]
   description = "The names of the firewall rules."
 }
 
@@ -44,7 +44,7 @@ output "connectors" {
 }
 
 output "connectors_names" {
-  value       = [for x in module.connectors.connectors : x.name]
+  value       = [for connector in module.connectors.connectors : connector.name]
   description = "The names of the connectors."
 }
 
@@ -54,6 +54,6 @@ output "peerings" {
 }
 
 output "peerings_names" {
-  value       = [for x in module.peerings.peerings : x.name]
+  value       = [for peering in module.peerings.peerings : peering.name]
   description = "The names of the peerings."
 }

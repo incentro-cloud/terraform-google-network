@@ -27,7 +27,7 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "google_compute_firewall" "rules" {
-  for_each                = { for x in var.rules : x.name => x }
+  for_each                = { for rule in var.rules : rule.name => rule }
   name                    = each.value.name
   description             = each.value.description
   direction               = each.value.direction

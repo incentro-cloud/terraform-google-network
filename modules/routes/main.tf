@@ -27,7 +27,7 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "google_compute_route" "routes" {
-  for_each               = { for x in var.routes : x.name => x }
+  for_each               = { for route in var.routes : route.name => route }
   name                   = each.value.name
   description            = each.value.description
   project                = var.project_id

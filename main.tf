@@ -27,17 +27,17 @@ module "vpc" {
 
 locals {
   subnets = [
-    for x in var.subnets : {
-      name                     = x.name
-      network                  = lookup(x, "network", module.vpc.vpc[0].name)
-      ip_cidr_range            = x.ip_cidr_range
-      region                   = x.region
-      description              = lookup(x, "description", null)
-      purpose                  = lookup(x, "purpose", null)
-      role                     = lookup(x, "role", null)
-      private_ip_google_access = lookup(x, "private_ip_google_access", false)
-      log_config               = lookup(x, "log_config", null)
-      secondary_ip_ranges      = lookup(x, "secondary_ip_ranges", [])
+    for subnet in var.subnets : {
+      name                     = subnet.name
+      network                  = lookup(subnet, "network", module.vpc.vpc[0].name)
+      ip_cidr_range            = subnet.ip_cidr_range
+      region                   = subnet.region
+      description              = lookup(subnet, "description", null)
+      purpose                  = lookup(subnet, "purpose", null)
+      role                     = lookup(subnet, "role", null)
+      private_ip_google_access = lookup(subnet, "private_ip_google_access", false)
+      log_config               = lookup(subnet, "log_config", null)
+      secondary_ip_ranges      = lookup(subnet, "secondary_ip_ranges", [])
     }
   ]
 }
@@ -55,19 +55,19 @@ module "subnets" {
 
 locals {
   routes = [
-    for x in var.routes : {
-      name                   = x.name
-      network                = lookup(x, "network", module.vpc.vpc[0].name)
-      description            = lookup(x, "description", null)
-      tags                   = lookup(x, "tags", null)
-      dest_range             = lookup(x, "dest_range", "0.0.0.0/0")
-      next_hop_gateway       = lookup(x, "next_hop_internet", false) == true ? "default-internet-gateway" : null
-      next_hop_ip            = lookup(x, "next_hop_ip", null)
-      next_hop_instance      = lookup(x, "next_hop_instance", null)
-      next_hop_instance_zone = lookup(x, "next_hop_instance_zone", null)
-      next_hop_vpn_tunnel    = lookup(x, "next_hop_vpn_tunnel", null)
-      next_hop_ilb           = lookup(x, "next_hop_ilb", null)
-      priority               = lookup(x, "priority", 1000)
+    for route in var.routes : {
+      name                   = route.name
+      network                = lookup(route, "network", module.vpc.vpc[0].name)
+      description            = lookup(route, "description", null)
+      tags                   = lookup(route, "tags", null)
+      dest_range             = lookup(route, "dest_range", "0.0.0.0/0")
+      next_hop_gateway       = lookup(route, "next_hop_internet", false) == true ? "default-internet-gateway" : null
+      next_hop_ip            = lookup(route, "next_hop_ip", null)
+      next_hop_instance      = lookup(route, "next_hop_instance", null)
+      next_hop_instance_zone = lookup(route, "next_hop_instance_zone", null)
+      next_hop_vpn_tunnel    = lookup(route, "next_hop_vpn_tunnel", null)
+      next_hop_ilb           = lookup(route, "next_hop_ilb", null)
+      priority               = lookup(route, "priority", 1000)
     }
   ]
 }
@@ -85,20 +85,20 @@ module "routes" {
 
 locals {
   rules = [
-    for x in var.rules : {
-      name                    = x.name
-      network                 = lookup(x, "network", module.vpc.vpc[0].name)
-      direction               = lookup(x, "direction", "INGRESS")
-      priority                = lookup(x, "priority", 1000)
-      description             = lookup(x, "description", null)
-      ranges                  = lookup(x, "ranges", null)
-      source_tags             = lookup(x, "source_tags", null)
-      source_service_accounts = lookup(x, "source_service_accounts", null)
-      target_tags             = lookup(x, "target_tags", null)
-      target_service_accounts = lookup(x, "target_service_accounts", null)
-      allow                   = lookup(x, "allow", [])
-      deny                    = lookup(x, "deny", [])
-      log_config              = lookup(x, "log_config", null)
+    for rule in var.rules : {
+      name                    = rule.name
+      network                 = lookup(rule, "network", module.vpc.vpc[0].name)
+      direction               = lookup(rule, "direction", "INGRESS")
+      priority                = lookup(rule, "priority", 1000)
+      description             = lookup(rule, "description", null)
+      ranges                  = lookup(rule, "ranges", null)
+      source_tags             = lookup(rule, "source_tags", null)
+      source_service_accounts = lookup(rule, "source_service_accounts", null)
+      target_tags             = lookup(rule, "target_tags", null)
+      target_service_accounts = lookup(rule, "target_service_accounts", null)
+      allow                   = lookup(rule, "allow", [])
+      deny                    = lookup(rule, "deny", [])
+      log_config              = lookup(rule, "log_config", null)
     }
   ]
 }
@@ -116,17 +116,17 @@ module "rules" {
 
 locals {
   connectors = [
-    for x in var.connectors : {
-      name           = lookup(x, "name", "vpc-connector")
-      network        = lookup(x, "network", module.vpc.vpc[0].name)
-      subnet         = lookup(x, "subnet", null)
-      region         = x.region
-      ip_cidr_range  = lookup(x, "ip_cidr_range", null)
-      machine_type   = lookup(x, "machine_type", "e2-micro")
-      min_throughput = lookup(x, "min_throughput", 200)
-      max_throughput = lookup(x, "max_throughput", 300)
-      min_instances  = lookup(x, "min_instances", 2)
-      max_instances  = lookup(x, "max_instances", 3)
+    for connector in var.connectors : {
+      name           = lookup(connector, "name", "vpc-connector")
+      network        = lookup(connector, "network", module.vpc.vpc[0].name)
+      subnet         = lookup(connector, "subnet", null)
+      region         = connector.region
+      ip_cidr_range  = lookup(connector, "ip_cidr_range", null)
+      machine_type   = lookup(connector, "machine_type", "e2-micro")
+      min_throughput = lookup(connector, "min_throughput", 200)
+      max_throughput = lookup(connector, "max_throughput", 300)
+      min_instances  = lookup(connector, "min_instances", 2)
+      max_instances  = lookup(connector, "max_instances", 3)
     }
   ]
 }
@@ -144,14 +144,14 @@ module "connectors" {
 
 locals {
   peerings = [
-    for x in var.peerings : {
-      name                                = x.name
-      network                             = lookup(x, "network", module.vpc.vpc[0].id)
-      peer_network                        = x.peer_network
-      export_custom_routes                = lookup(x, "export_custom_routes", false)
-      import_custom_routes                = lookup(x, "import_custom_routes", false)
-      export_subnet_routes_with_public_ip = lookup(x, "export_subnet_routes_with_public_ip", true)
-      import_subnet_routes_with_public_ip = lookup(x, "import_subnet_routes_with_public_ip", false)
+    for peering in var.peerings : {
+      name                                = peering.name
+      network                             = var.create_vpc ? module.vpc.vpc[0].id : peering.network
+      peer_network                        = peering.peer_network
+      export_custom_routes                = lookup(peering, "export_custom_routes", false)
+      import_custom_routes                = lookup(peering, "import_custom_routes", false)
+      export_subnet_routes_with_public_ip = lookup(peering, "export_subnet_routes_with_public_ip", true)
+      import_subnet_routes_with_public_ip = lookup(peering, "import_subnet_routes_with_public_ip", false)
     }
   ]
 }

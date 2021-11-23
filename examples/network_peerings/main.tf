@@ -21,7 +21,7 @@ terraform {
 # VPC NETWORK, SUBNETS, AND PEERINGS
 # ---------------------------------------------------------------------------------------------------------------------
 
-module "network" {
+module "network_01" {
   source = "../../"
 
   project_id = var.project_id
@@ -37,23 +37,38 @@ module "network" {
 
   peerings = [
     {
-      name         = "vpc-network-01-peer-vpc-network-peer"
-      peer_network = module.network_peer.vpc[0].id
+      name         = "vpc-network-01-peer-vpc-network-02"
+      peer_network = module.network_02.vpc[0].id
     }
   ]
 }
 
-module "network_peer" {
+module "network_02" {
   source = "../../"
 
   project_id = var.project_id
-  name       = "vpc-network-peer"
+  name       = "vpc-network-02"
 
   subnets = [
     {
       name          = "default"
       ip_cidr_range = "10.1.1.0/24"
       region        = "europe-west3"
+    }
+  ]
+}
+
+module "network_02_peerings" {
+  source = "../../"
+
+  project_id = var.project_id
+  create_vpc = false
+
+  peerings = [
+    {
+      name         = "vpc-network-02-peer-vpc-network-01"
+      network      = module.network_02.vpc[0].id
+      peer_network = module.network_01.vpc[0].id
     }
   ]
 }

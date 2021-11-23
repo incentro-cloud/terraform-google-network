@@ -27,7 +27,7 @@ terraform {
 # ---------------------------------------------------------------------------------------------------------------------
 
 resource "google_compute_network_peering" "peerings" {
-  for_each                            = { for x in var.peerings : x.name => x }
+  for_each                            = { for peering in var.peerings : peering.name => peering }
   name                                = each.value.name
   network                             = each.value.network
   peer_network                        = each.value.peer_network
