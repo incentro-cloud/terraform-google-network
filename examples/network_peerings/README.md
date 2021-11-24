@@ -13,7 +13,8 @@ This is an example of the usage of the module.
 
 ```hcl
 module "network_01" {
-  source = "../../"
+  source  = "incentro-cloud/network/google"
+  version = "~> 0.1"
 
   project_id = var.project_id
   name       = "vpc-network"
@@ -35,7 +36,8 @@ module "network_01" {
 }
 
 module "network_02" {
-  source = "../../"
+  source  = "incentro-cloud/network/google"
+  version = "~> 0.1"
 
   project_id = var.project_id
   name       = "vpc-network-02"
@@ -50,7 +52,8 @@ module "network_02" {
 }
 
 module "network_02_peerings" {
-  source = "../../"
+  source  = "incentro-cloud/network/google"
+  version = "~> 0.1"
 
   project_id = var.project_id
   create_vpc = false

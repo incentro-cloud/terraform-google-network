@@ -14,7 +14,8 @@ This is an example of the usage of the module.
 
 ```hcl
 module "network" {
-  source = "../../"
+  source  = "incentro-cloud/network/google"
+  version = "~> 0.1"
 
   project_id                      = var.project_id
   name                            = "vpc-network"
