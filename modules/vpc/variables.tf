@@ -25,7 +25,7 @@ variable "description" {
 
 variable "auto_create_subnetworks" {
   type        = bool
-  description = "Optional. When set to true, the network is created in 'auto subnet mode'. When set to false, the network is created in 'custom subnet mode'."
+  description = "Optional. When set to 'true', the network is created in 'auto subnet mode'. When set to 'false', the network is created in 'custom subnet mode'."
 }
 
 variable "delete_default_routes_on_create" {

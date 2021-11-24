@@ -15,6 +15,8 @@ This module supports creating:
 
 ## Example usage
 
+This is an example of the usage of the module. More examples can be found in under 'examples'.
+
 ```hcl
 module "network" {
   source  = "incentro-cloud/network/google"
