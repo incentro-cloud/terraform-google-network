@@ -172,22 +172,22 @@ Submodule for creating a VPC network.
 
 [Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network "google_compute_network") for the **google_compute_network** documentation.
 
-| Name | Type | Default | Description |
-|---|---|---|---|
-| `project_id` | string |  | Required. The project identifier. |
-| `create_vpc` | bool | true | Optional. When set to 'true', a VPC network is created. |
-| `name` | string | "vpc-network" | Optional. The name of the VPC network. |
-| `routing_mode` | string | "REGIONAL" | Optional. The network routing mode. |
-| `description` | string | null | Optional. The description of the VPC network. |
-| `auto_create_subnetworks` | bool | false | Optional. When set to 'true', the network is created in 'auto subnet mode'. When set to 'false', the network is created in 'custom subnet mode'. |
-| `delete_default_routes_on_create` | bool | false | Optional. If set, ensures that all routes within the network specified whose names begin with 'default-route' and with a next hop of 'default-internet-gateway' are deleted. |
-| `mtu` | number | 1460 | Optional. The network MTU. Must be a value between 1460 and 1500 inclusive. |
-| `shared_vpc` | bool | false | Optional. Makes this project a shared VPC host project if 'true'. |
-| `subnets` | any | [] | Optional. The list of subnets. |
-| `routes` | any | [] | Optional. The list of routes. |
-| `rules` | any | [] | Optional. The list of firewall rules. |
-| `connectors` | any | [] | Optional. The list of connectors. |
-| `peerings` | any | [] | Optional. The list of peerings. |
+| Name                              | Type   | Default       | Description                                                                                                                                                                  |
+|-----------------------------------|--------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `project_id`                      | string |               | Required. The project identifier.                                                                                                                                            |
+| `create_vpc`                      | bool   | true          | Optional. When set to 'true', a VPC network is created.                                                                                                                      |
+| `name`                            | string | "vpc-network" | Optional. The name of the VPC network.                                                                                                                                       |
+| `routing_mode`                    | string | "REGIONAL"    | Optional. The network routing mode.                                                                                                                                          |
+| `description`                     | string | null          | Optional. The description of the VPC network.                                                                                                                                |
+| `auto_create_subnetworks`         | bool   | false         | Optional. When set to 'true', the network is created in 'auto subnet mode'. When set to 'false', the network is created in 'custom subnet mode'.                             |
+| `delete_default_routes_on_create` | bool   | false         | Optional. If set, ensures that all routes within the network specified whose names begin with 'default-route' and with a next hop of 'default-internet-gateway' are deleted. |
+| `mtu`                             | number | 1460          | Optional. The network MTU. Must be a value between 1460 and 1500 inclusive.                                                                                                  |
+| `shared_vpc`                      | bool   | false         | Optional. Makes this project a shared VPC host project if 'true'.                                                                                                            |
+| `subnets`                         | any    | []            | Optional. The list of subnets.                                                                                                                                               |
+| `routes`                          | any    | []            | Optional. The list of routes.                                                                                                                                                |
+| `rules`                           | any    | []            | Optional. The list of firewall rules.                                                                                                                                        |
+| `connectors`                      | any    | []            | Optional. The list of connectors.                                                                                                                                            |
+| `peerings`                        | any    | []            | Optional. The list of peerings.                                                                                                                                              |
 
 ### Subnets
 
@@ -195,18 +195,18 @@ Submodule for creating subnets.
 
 [Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork "google_compute_subnetwork") for the **google_compute_subnetwork** documentation.
 
-| Name | Type | Default | Description |
-|---|---|---|---|
-| `name` | string |  | Required. The name of the subnet. |
-| `network` | string | module.vpc | Optional. The network this subnet belongs to. |
-| `ip_cidr_range` | string | | Required. The range of internal addresses for the subnet. |
-| `region` | string | | Required. The region of the subnet.  |
-| `description` | string | null | Optional. The description of the subnet. |
-| `purpose` | string | null | Optional. The purpose of the subnet. |
-| `role` | string | null | Optional. The role of subnet. |
-| `private_ip_google_access` | bool | false | Optional. When set to 'true', virtual machine instances in this subnet without external IP addresses can access Google APIs and services. |
-| `log_config` | any | null | Optional. The logging options for the subnet flow logs. |
-| `secondary_ip_ranges` | any | [] | Optional. The list of secondary IP ranges for virtual machine instances contained in this subnet. |
+| Name                       | Type   | Default    | Description                                                                                                                               |
+|----------------------------|--------|------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `name`                     | string |            | Required. The name of the subnet.                                                                                                         |
+| `network`                  | string | module.vpc | Optional. The network this subnet belongs to.                                                                                             |
+| `ip_cidr_range`            | string |            | Required. The range of internal addresses for the subnet.                                                                                 |
+| `region`                   | string |            | Required. The region of the subnet.                                                                                                       |
+| `description`              | string | null       | Optional. The description of the subnet.                                                                                                  |
+| `purpose`                  | string | null       | Optional. The purpose of the subnet.                                                                                                      |
+| `role`                     | string | null       | Optional. The role of subnet.                                                                                                             |
+| `private_ip_google_access` | bool   | false      | Optional. When set to 'true', virtual machine instances in this subnet without external IP addresses can access Google APIs and services. |
+| `log_config`               | any    | null       | Optional. The logging options for the subnet flow logs.                                                                                   |
+| `secondary_ip_ranges`      | any    | []         | Optional. The list of secondary IP ranges for virtual machine instances contained in this subnet.                                         |
 
 ### Routes
 
@@ -214,20 +214,20 @@ Submodule for creating routes.
 
 [Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_route "google_compute_route") for the **google_compute_route** documentation.
 
-| Name | Type | Default | Description |
-|---|---|---|---|
-| `name` | string |  | Required. The name of the route. |
-| `network` | string | module.vpc | Optional. The network this route belongs to. |
-| `description` | string | null | Optional. The description of the subnet. |
-| `tags` | any | null | Optional. The instance tags to which this route applies. |
-| `dest_range` | string | "0.0.0.0/0" | Optional. The destination range of outgoing packets that this route applies to. |
-| `next_hop_gateway` | string | null | Optional. The URL to a gateway that should handle matching packets. |
-| `next_hop_ip` | string | null | Optional. The IP address of an instance that should handle matching packets. |
-| `next_hop_instance` | string | null | Optional. The URL to an instance that should handle matching packets. |
-| `next_hop_instance_zone` | string | null | Optional when `next_hop_instance` is specified. The zone of the instance specified in `next_hop_instance`. |
-| `next_hop_vpn_tunnel` | string | null | Optional. The URL to a VPN tunnel that should handle matching packets. |
-| `next_hop_ilb` | string | null | Optional. The IP address or URL to a forwarding rule that should handle matching packets. |
-| `priority` | number | 1000 | Optional. The priority of this route. |
+| Name                     | Type   | Default     | Description                                                                                                |
+|--------------------------|--------|-------------|------------------------------------------------------------------------------------------------------------|
+| `name`                   | string |             | Required. The name of the route.                                                                           |
+| `network`                | string | module.vpc  | Optional. The network this route belongs to.                                                               |
+| `description`            | string | null        | Optional. The description of the subnet.                                                                   |
+| `tags`                   | any    | null        | Optional. The instance tags to which this route applies.                                                   |
+| `dest_range`             | string | "0.0.0.0/0" | Optional. The destination range of outgoing packets that this route applies to.                            |
+| `next_hop_gateway`       | string | null        | Optional. The URL to a gateway that should handle matching packets.                                        |
+| `next_hop_ip`            | string | null        | Optional. The IP address of an instance that should handle matching packets.                               |
+| `next_hop_instance`      | string | null        | Optional. The URL to an instance that should handle matching packets.                                      |
+| `next_hop_instance_zone` | string | null        | Optional when `next_hop_instance` is specified. The zone of the instance specified in `next_hop_instance`. |
+| `next_hop_vpn_tunnel`    | string | null        | Optional. The URL to a VPN tunnel that should handle matching packets.                                     |
+| `next_hop_ilb`           | string | null        | Optional. The IP address or URL to a forwarding rule that should handle matching packets.                  |
+| `priority`               | number | 1000        | Optional. The priority of this route.                                                                      |
 
 ### Rules
 
@@ -235,21 +235,21 @@ Submodule for creating rules.
 
 [Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_firewall "google_compute_firewall") for the **google_compute_firewall** documentation.
 
-| Name | Type | Default | Description |
-|---|---|---|---|
-| `name` | string |  | Required. The name of the rule. |
-| `network` | string |  module.vpc | Optional. The network this rule belongs to. |
-| `direction` | string | "INGRESS" | Optional. The direction of traffic to which this rule applies. |
-| `priority` | number | 1000 | Optional. The priority for this rule. This is an integer between 0 and 65535, both inclusive. When not specified, the value assumed is 1000. |
-| `description` | string | null | Optional. The description of the rule. |
-| `ranges` | any | null | Optional. If ranges are specified, the rule will apply only to traffic that has IP address in these ranges. These ranges must be expressed in CIDR format. |
-| `source_tags` | any | null | Optional. If source tags are specified, the rule will apply only to traffic with source IP that belongs to a tag listed in source tags. Source tags cannot be used to control traffic to an instance's external IP address. |
-| `source_service_accounts` | any | null | Optional. If source service accounts are specified, the rule will apply only to traffic originating from an instance with a service account in this list. Source service accounts cannot be used to control traffic to an instance's external IP address because service accounts are associated with an instance, not an IP address. |
-| `target_tags` | any | null | Optional. The instance tags indicating sets of instances located in the network that may make network connections as specified in allowed. |
-| `target_service_accounts` | any | null | Optional. The service accounts indicating sets of instances located in the network that may make network connections as specified in allowed. |
-| `allow` | any | [] | Optional. The list of allow rules specified by this rule. Each rule specifies a protocol and port-range tuple that describes a permitted connection. |
-| `deny` | any | [] | Optional. The list of deny rules specified by this rule. Each rule specifies a protocol and port-range tuple that describes a denied connection. |
-| `log_config` | any | null | Optional. The logging options. If defined, logging is enabled, and logs will be exported to Cloud Logging. |
+| Name                      | Type   | Default    | Description                                                                                                                                                                                                                                                                                                                           |
+|---------------------------|--------|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `name`                    | string |            | Required. The name of the rule.                                                                                                                                                                                                                                                                                                       |
+| `network`                 | string | module.vpc | Optional. The network this rule belongs to.                                                                                                                                                                                                                                                                                           |
+| `direction`               | string | "INGRESS"  | Optional. The direction of traffic to which this rule applies.                                                                                                                                                                                                                                                                        |
+| `priority`                | number | 1000       | Optional. The priority for this rule. This is an integer between 0 and 65535, both inclusive. When not specified, the value assumed is 1000.                                                                                                                                                                                          |
+| `description`             | string | null       | Optional. The description of the rule.                                                                                                                                                                                                                                                                                                |
+| `ranges`                  | any    | null       | Optional. If ranges are specified, the rule will apply only to traffic that has IP address in these ranges. These ranges must be expressed in CIDR format.                                                                                                                                                                            |
+| `source_tags`             | any    | null       | Optional. If source tags are specified, the rule will apply only to traffic with source IP that belongs to a tag listed in source tags. Source tags cannot be used to control traffic to an instance's external IP address.                                                                                                           |
+| `source_service_accounts` | any    | null       | Optional. If source service accounts are specified, the rule will apply only to traffic originating from an instance with a service account in this list. Source service accounts cannot be used to control traffic to an instance's external IP address because service accounts are associated with an instance, not an IP address. |
+| `target_tags`             | any    | null       | Optional. The instance tags indicating sets of instances located in the network that may make network connections as specified in allowed.                                                                                                                                                                                            |
+| `target_service_accounts` | any    | null       | Optional. The service accounts indicating sets of instances located in the network that may make network connections as specified in allowed.                                                                                                                                                                                         |
+| `allow`                   | any    | []         | Optional. The list of allow rules specified by this rule. Each rule specifies a protocol and port-range tuple that describes a permitted connection.                                                                                                                                                                                  |
+| `deny`                    | any    | []         | Optional. The list of deny rules specified by this rule. Each rule specifies a protocol and port-range tuple that describes a denied connection.                                                                                                                                                                                      |
+| `log_config`              | any    | null       | Optional. The logging options. If defined, logging is enabled, and logs will be exported to Cloud Logging.                                                                                                                                                                                                                            |
 
 ### Connectors
 
@@ -257,18 +257,18 @@ Submodule for creating connectors.
 
 [Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/vpc_access_connector "google_vpc_access_connector") for the **google_vpc_access_connector** documentation.
 
-| Name | Type | Default | Description |
-|---|---|---|---|
-| `name` | string | "vpc-connector" | Optional. The name of the connector. |
-| `network` | string | module.vpc | Optional. The name of the network this connector belongs to. |
-| `subnet` | string | null | Optional. The subnet in which to house the connectors. |
-| `region` | string |  | Required. The region in which to house the connectors. |
-| `ip_cidr_range` | string | null | Optional. The range of internal addresses for the connectors. |
-| `machine_type` | string | e2-micro | Optional. The machine type of the underlying virtual machine instances. |
-| `min_throughput` | number | 200 | Optional. The minimum throughput in Mbps. |
-| `max_throughput` | number | 300 | Optional. The maximum throughput in Mbps. |
-| `min_instances` | number | 2 | Optional. The minimum value of instances in the underlying autoscaling group. |
-| `max_instances` | number | 3 | Optional. The maximum value of instances in the underlying autoscaling group. |
+| Name             | Type   | Default         | Description                                                                   |
+|------------------|--------|-----------------|-------------------------------------------------------------------------------|
+| `name`           | string | "vpc-connector" | Optional. The name of the connector.                                          |
+| `network`        | string | module.vpc      | Optional. The name of the network this connector belongs to.                  |
+| `subnet`         | string | null            | Optional. The subnet in which to house the connectors.                        |
+| `region`         | string |                 | Required. The region in which to house the connectors.                        |
+| `ip_cidr_range`  | string | null            | Optional. The range of internal addresses for the connectors.                 |
+| `machine_type`   | string | e2-micro        | Optional. The machine type of the underlying virtual machine instances.       |
+| `min_throughput` | number | 200             | Optional. The minimum throughput in Mbps.                                     |
+| `max_throughput` | number | 300             | Optional. The maximum throughput in Mbps.                                     |
+| `min_instances`  | number | 2               | Optional. The minimum value of instances in the underlying autoscaling group. |
+| `max_instances`  | number | 3               | Optional. The maximum value of instances in the underlying autoscaling group. |
 
 ### Peerings
 
@@ -276,29 +276,29 @@ Submodule for creating network peerings.
 
 [Click here](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_network_peering "google_compute_network_peering") for the **google_compute_network_peering** documentation.
 
-| Name | Type | Default | Description |
-|---|---|---|---|
-| `name` | string |  | Required. The name of the peering. |
-| `network` | string | module.vpc | Required. The primary network of the peering. |
-| `peer_network` | string |  | Required. The peer network in the peering. The peer network may belong to a different project. |
-| `export_custom_routes` | bool | false | Optional. Whether to export the custom routes to the peer network. |
-| `import_custom_routes` | bool | false | Optional. Whether to import the custom routes from the peer network. |
-| `export_subnet_routes_with_public_ip` | bool | true| Optional. Whether subnet routes with public IP range are exported. |
-| `import_subnet_routes_with_public_ip` | bool | false | Optional. Whether subnet routes with public IP range are imported. |
+| Name                                  | Type   | Default    | Description                                                                                    |
+|---------------------------------------|--------|------------|------------------------------------------------------------------------------------------------|
+| `name`                                | string |            | Required. The name of the peering.                                                             |
+| `network`                             | string | module.vpc | Required. The primary network of the peering.                                                  |
+| `peer_network`                        | string |            | Required. The peer network in the peering. The peer network may belong to a different project. |
+| `export_custom_routes`                | bool   | false      | Optional. Whether to export the custom routes to the peer network.                             |
+| `import_custom_routes`                | bool   | false      | Optional. Whether to import the custom routes from the peer network.                           |
+| `export_subnet_routes_with_public_ip` | bool   | true       | Optional. Whether subnet routes with public IP range are exported.                             |
+| `import_subnet_routes_with_public_ip` | bool   | false      | Optional. Whether subnet routes with public IP range are imported.                             |
 
 ## Outputs
 
-| Name | Description |
-|---|---|
-| `vpc` | The VPC network. |
-| `vpc_name` | The name of the VPC network. |
-| `subnets` | The subnets. |
-| `subnets_names` | The names of the subnets. |
-| `routes` | The routes. |
-| `routes_names` | The names of the routes. |
-| `rules` | The rules. |
-| `rules_names` | The names of the rules. |
-| `connectors` | The connectors. |
+| Name               | Description                  |
+|--------------------|------------------------------|
+| `vpc`              | The VPC network.             |
+| `vpc_name`         | The name of the VPC network. |
+| `subnets`          | The subnets.                 |
+| `subnets_names`    | The names of the subnets.    |
+| `routes`           | The routes.                  |
+| `routes_names`     | The names of the routes.     |
+| `rules`            | The rules.                   |
+| `rules_names`      | The names of the rules.      |
+| `connectors`       | The connectors.              |
 | `connectors_names` | The names of the connectors. |
-| `peerings` | The peerings. |
-| `peerings_names` | The names of the peerings. |
+| `peerings`         | The peerings.                |
+| `peerings_names`   | The names of the peerings.   |
