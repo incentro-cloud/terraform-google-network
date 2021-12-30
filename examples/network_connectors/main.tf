@@ -154,11 +154,4 @@ module "network" {
       region        = "europe-west1"
     }
   ]
-
-  routers = [
-    {
-      name   = "vpc-router"
-      region = "europe-west1"
-    }
-  ]
 }
