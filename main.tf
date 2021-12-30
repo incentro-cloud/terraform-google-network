@@ -174,7 +174,7 @@ locals {
       region                             = router.region
       network                            = lookup(router, "network", module.vpc.vpc[0].name)
       create_nat                         = lookup(router, "create_nat", false)
-      source_subnetwork_ip_ranges_to_nat = lookup(router, "source_subnet_ip_ranges_to_nat", "ALL_SUBNETWORKS_ALL_IP_RANGES")
+      source_subnetwork_ip_ranges_to_nat = lookup(router, "source_subnet_ip_ranges_to_nat", "ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES")
       nat_ip_allocate_option             = lookup(router, "nat_ip_allocate_option", "AUTO_ONLY")
     }
   ]
