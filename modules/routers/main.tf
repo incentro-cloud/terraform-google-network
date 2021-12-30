@@ -35,7 +35,7 @@ resource "google_compute_router" "routers" {
 }
 
 resource "google_compute_router_nat" "routers_nats" {
-  for_each                           = { for router in var.routers : router.name => router if router.create_nat }
+  for_each                           = { for router in var.routers : "${router.name}-nat" => router if router.create_nat }
   name                               = "${each.value.name}-nat"
   project                            = var.project_id
   router                             = google_compute_router.routers[each.value.name].name
