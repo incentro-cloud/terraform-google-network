@@ -1,5 +1,5 @@
 output "vpc" {
-  value       = var.create_vpc ? module.vpc.vpc : null
+  value       = var.create_vpc ? module.vpc.vpc[0] : null
   description = "The VPC network."
 }
 
@@ -14,7 +14,7 @@ output "subnets" {
 }
 
 output "subnets_names" {
-  value       = [for subnet in module.subnets.subnets : subnet.name]
+  value       = { for subnet in module.subnets.subnets : subnet.name => lower(subnet.name) }
   description = "The names of the subnets."
 }
 

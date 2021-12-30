@@ -38,7 +38,7 @@ module "network_01" {
   peerings = [
     {
       name         = "vpc-network-01-peer-vpc-network-02"
-      peer_network = module.network_02.vpc[0].id
+      peer_network = module.network_02.vpc.id
     }
   ]
 }
@@ -67,8 +67,8 @@ module "network_02_peerings" {
   peerings = [
     {
       name         = "vpc-network-02-peer-vpc-network-01"
-      network      = module.network_02.vpc[0].id
-      peer_network = module.network_01.vpc[0].id
+      network      = module.network_02.vpc.id
+      peer_network = module.network_01.vpc.id
     }
   ]
 }
