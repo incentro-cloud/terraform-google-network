@@ -9,26 +9,26 @@ output "vpc_name" {
 }
 
 output "subnets_names" {
-  value       = { for subnet in module.subnets.subnets : subnet.name => subnet.name }
+  value       = [for subnet in module.subnets.subnets : subnet.name]
   description = "The names of the subnets."
 }
 
 output "routes_names" {
-  value       = { for route in module.routes.routes : route.name => route.name }
+  value       = [for route in module.routes.routes : route.name]
   description = "The names of the routes."
 }
 
 output "rules_names" {
-  value       = { for rule in module.rules.rules : rule.name => rule.name }
+  value       = [for rule in module.rules.rules : rule.name]
   description = "The names of the firewall rules."
 }
 
 output "connectors_names" {
-  value       = { for connector in module.connectors.connectors : connector.name => connector.name }
+  value       = [for connector in module.connectors.connectors : connector.name]
   description = "The names of the connectors."
 }
 
 output "peerings_names" {
-  value       = { for peering in module.peerings.peerings : peering.name => peering.name }
+  value       = [for peering in module.peerings.peerings : peering.name]
   description = "The names of the peerings."
 }
