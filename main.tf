@@ -146,7 +146,7 @@ locals {
   peerings = [
     for peering in var.peerings : {
       name                                = peering.name
-      network                             = var.create_vpc ? module.vpc.vpc[0].id : peering.network
+      network                             = lookup(peering, "network", module.vpc.vpc[0].id)
       peer_network                        = peering.peer_network
       export_custom_routes                = lookup(peering, "export_custom_routes", false)
       import_custom_routes                = lookup(peering, "import_custom_routes", false)
@@ -161,4 +161,28 @@ module "peerings" {
 
   project_id = var.project_id
   peerings   = local.peerings
+}
+
+# ---------------------------------------------------------------------------------------------------------------------
+# ROUTERS
+# ---------------------------------------------------------------------------------------------------------------------
+
+locals {
+  routers = [
+    for router in var.routers : {
+      name                               = router.name
+      region                             = router.region
+      network                            = lookup(router, "network", module.vpc.vpc[0].name)
+      create_nat                         = lookup(router, "create_nat", false)
+      source_subnetwork_ip_ranges_to_nat = lookup(router, "source_subnet_ip_ranges_to_nat", "ALL_SUBNETWORKS_ALL_IP_RANGES")
+      nat_ip_allocate_option             = lookup(router, "nat_ip_allocate_option", "AUTO_ONLY")
+    }
+  ]
+}
+
+module "routers" {
+  source = "./modules/routers"
+
+  project_id = var.project_id
+  routers    = local.routers
 }

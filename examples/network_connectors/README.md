@@ -1,28 +1,22 @@
-# ---------------------------------------------------------------------------------------------------------------------
-# TERRAFORM CONFIGURATION
-# ---------------------------------------------------------------------------------------------------------------------
+# Network
 
-terraform {
-  required_version = "~> 1.0"
+This example illustrates creating a VPC network, subnet, route, rules, and connector.
 
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "~> 4.0"
-    }
-    google-beta = {
-      source  = "hashicorp/google-beta"
-      version = "~> 4.0"
-    }
-  }
-}
+It will do the following:
 
-# ---------------------------------------------------------------------------------------------------------------------
-# VPC NETWORK, SUBNETS, ROUTES, RULES, AND CONNECTORS
-# ---------------------------------------------------------------------------------------------------------------------
+- Create a VPC network and subnet.
+- Create a default internet gateway route.
+- Create five standard firewall rules.
+- Create VPC connector.
 
+## Example usage
+
+This is an example of the usage of the module.
+
+```hcl
 module "network" {
-  source = "../../"
+  source  = "incentro-cloud/network/google"
+  version = "~> 0.1"
 
   project_id                      = var.project_id
   name                            = "vpc-network"
@@ -147,11 +141,12 @@ module "network" {
     }
   ]
 
-  routers = [
+  connectors = [
     {
-      name       = "vpc-router"
-      region     = "europe-west1"
-      create_nat = true
+      name          = "vpc-connector"
+      ip_cidr_range = "10.0.0.0/28"
+      region        = "europe-west1"
     }
   ]
 }
+```

@@ -147,11 +147,18 @@ module "network" {
     }
   ]
 
+  connectors = [
+    {
+      name          = "vpc-connector"
+      ip_cidr_range = "10.0.0.0/28"
+      region        = "europe-west1"
+    }
+  ]
+
   routers = [
     {
-      name       = "vpc-router"
-      region     = "europe-west1"
-      create_nat = true
+      name   = "vpc-router"
+      region = "europe-west1"
     }
   ]
 }

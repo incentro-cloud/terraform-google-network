@@ -80,3 +80,9 @@ variable "peerings" {
   description = "Optional. The list of peerings."
   default     = []
 }
+
+variable "routers" {
+  type        = any
+  description = "Optional. The list of routers."
+  default     = []
+}
