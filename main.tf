@@ -29,7 +29,7 @@ locals {
   subnets = [
     for subnet in var.subnets : {
       name                     = subnet.name
-      network                  = lookup(subnet, "network", module.vpc.vpc[0].name)
+      network                  = var.create_vpc ? module.vpc.vpc[0].id : subnet.network
       ip_cidr_range            = subnet.ip_cidr_range
       region                   = subnet.region
       description              = lookup(subnet, "description", null)
@@ -57,7 +57,7 @@ locals {
   routes = [
     for route in var.routes : {
       name                   = route.name
-      network                = lookup(route, "network", module.vpc.vpc[0].name)
+      network                = var.create_vpc ? module.vpc.vpc[0].id : route.network
       description            = lookup(route, "description", null)
       tags                   = lookup(route, "tags", null)
       dest_range             = lookup(route, "dest_range", "0.0.0.0/0")
@@ -87,7 +87,7 @@ locals {
   rules = [
     for rule in var.rules : {
       name                    = rule.name
-      network                 = lookup(rule, "network", module.vpc.vpc[0].name)
+      network                 = var.create_vpc ? module.vpc.vpc[0].id : rule.network
       direction               = lookup(rule, "direction", "INGRESS")
       priority                = lookup(rule, "priority", 1000)
       description             = lookup(rule, "description", null)
@@ -118,7 +118,7 @@ locals {
   connectors = [
     for connector in var.connectors : {
       name           = lookup(connector, "name", "vpc-connector")
-      network        = lookup(connector, "network", module.vpc.vpc[0].name)
+      network        = var.create_vpc ? module.vpc.vpc[0].name : connector.network
       subnet         = lookup(connector, "subnet", null)
       region         = connector.region
       ip_cidr_range  = lookup(connector, "ip_cidr_range", null)
@@ -146,7 +146,7 @@ locals {
   peerings = [
     for peering in var.peerings : {
       name                                = peering.name
-      network                             = lookup(peering, "network", module.vpc.vpc[0].id)
+      network                             = var.create_vpc ? module.vpc.vpc[0].id : peering.network
       peer_network                        = peering.peer_network
       export_custom_routes                = lookup(peering, "export_custom_routes", false)
       import_custom_routes                = lookup(peering, "import_custom_routes", false)
@@ -172,7 +172,7 @@ locals {
     for router in var.routers : {
       name                               = router.name
       region                             = router.region
-      network                            = lookup(router, "network", module.vpc.vpc[0].name)
+      network                            = var.create_vpc ? module.vpc.vpc[0].id : router.network
       create_nat                         = lookup(router, "create_nat", false)
       source_subnetwork_ip_ranges_to_nat = lookup(router, "source_subnet_ip_ranges_to_nat", "ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES")
       nat_ip_allocate_option             = lookup(router, "nat_ip_allocate_option", "AUTO_ONLY")
